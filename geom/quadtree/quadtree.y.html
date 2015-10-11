@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>geom.quadtree</title>
+<style>
+rect {
+	fill: none;
+	stroke: #000;
+}
+circle{
+	fill: tomato;
+}
+</style>
+<body>
+<script src="../../d3.js"></script>
+<script>
+var width = 960, height = 500;
+var svg = d3.select("body")
+				.append("svg")
+				.attr("width", width)
+				.attr("height", height);
+
+var data = [ [ 10, 10 ], [ 20, 20 ],[ 40, 40 ], [ 80, 80 ],[ 160, 160 ] ];
+
+var quadtree = d3.geom.quadtree()
+						.y(function(d) { return d[1]*2; })
+						(data);
+
+svg.selectAll("rect")
+		.data(nodes(quadtree))
+		.enter()
+		.append("rect")
+		.attr("class", "node")
+		.attr("x", function(d) { return d.x;} )
+		.attr("y", function(d) { return d.y;} )
+		.attr("width", function(d) { return d.width;} )
+		.attr("height", function(d) { return d.height;} );
+
+svg.selectAll(".point")
+		.data(nodes(quadtree))
+		.enter().append("circle")
+		.attr("class", "point")
+		.attr("cx", function(d) { return d.x; })
+		.attr("cy", function(d) { return d.y; })
+		.attr("r", 4);
+
+function nodes(quadtree) {
+	var nodes = [];
+	quadtree.visit(function(node, x1, y1, x2, y2) {
+		nodes.push({x: x1, y: y1, width: x2 - x1, height: y2 - y1});
+	});
+	
+	return nodes;
+}
+</script>
