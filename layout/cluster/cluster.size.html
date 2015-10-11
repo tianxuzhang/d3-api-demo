@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+svg {
+	font-weight:bold;
+	font-size:30px;
+}
+
+.node circle {
+  fill: #fff;
+  stroke: tomato;
+  stroke-width: 3px;
+}
+
+.link {
+  fill: none;
+  stroke: yellowgreen;
+  stroke-width: 3px;
+}
+
+</style>
+<body>
+<script src="../../d3.js"></script>
+<script>
+//层次数据
+var data={
+  "name":"A",
+  "children":[
+      {
+          "name":"B01",
+          "children":[
+              {	"name":"C01"	},
+              {	"name":"C02"	},
+              {	"name":"C03"	}
+          ]
+      },
+      {
+          "name":"B02",
+          "children":[
+              {	"name":"C04"	},
+              {	"name":"C05"	}
+          ]
+      }
+  ]
+};
+var width = 960,
+    height = 200;
+
+var cluster = d3.layout.cluster()
+ //   .size([height, width - 200]);
+    .size([height, width]);
+
+var diagonal = d3.svg.diagonal()
+    .projection(function(d) { return [d.y, d.x]; });
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+  .append("g")
+    .attr("transform", "translate(60,0)");
+
+  var nodes = cluster.nodes(data),
+      links = cluster.links(nodes);
+  var link = svg.selectAll(".link")
+      .data(links)
+    .enter().append("path")
+      .attr("class", "link")
+      .attr("d", diagonal);
+
+  var node = svg.selectAll(".node")
+      .data(nodes)
+    .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
+
+  node.append("circle")
+      .attr("r", 4.5);
+
+  node.append("text")
+      .attr("dx", function(d) { return d.children ? -8 : 8; })
+      .attr("dy", 10)
+      .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
+      .text(function(d) { return d.name; });
+</script>
