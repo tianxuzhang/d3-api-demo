@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+rect {
+  fill: none;
+  stroke: #fff;
+}
+
+</style>
+<body>
+<script src="../../d3.js"></script>
+<script>
+var data={
+ "name": "AAA",
+ "children": 
+ [
+  	  { "name": "BBB", 
+  	  	"children": 
+  	    [
+  	      	{"name": "CCC", 
+  	      	"children": 
+  	      	[
+  	          		{"name": "DDD", 
+  	          		 "children":
+					 [
+							{"name": "EEE", "size": 73},
+					      	{"name": "EEE", "size": 39},
+					      	{"name": "EEE", "size": 67},
+					      	{"name": "EEE", "size": 73},
+					      	{"name": "EEE", "size": 39},
+					      	{"name": "EEE", "size": 67},
+					      	{"name": "EEE", "size": 73},
+					      	{"name": "EEE", "size": 39},
+					      	{"name": "EEE", "size": 67},
+					      	{"name": "EEE", "size": 73},
+					      	{"name": "EEE", "size": 39},
+					      	{"name": "EEE", "size": 67},
+					      	{"name": "EEE", "size": 73},
+					      	{"name": "EEE", "size": 39},
+					      	{"name": "EEE", "size": 67},
+					      	{"name": "EEE", "size": 73}
+					 ]},
+			      	{"name": "DDD", "size": 73},
+			      	{"name": "DDD", "size": 39},
+			      	{"name": "DDD", "size": 67},
+			      	{"name": "DDD", "size": 73},
+			      	{"name": "DDD", "size": 39},
+			      	{"name": "DDD", "size": 67},
+			      	{"name": "DDD", "size": 73},
+			      	{"name": "DDD", "size": 39},
+			      	{"name": "DDD", "size": 67},
+			      	{"name": "DDD", "size": 73},
+			      	{"name": "DDD", "size": 39},
+			      	{"name": "DDD", "size": 67},
+			      	{"name": "DDD", "size": 73},
+			      	{"name": "DDD", "size": 39},
+			      	{"name": "DDD", "size": 67},
+			      	{"name": "DDD", "size": 73}
+  	      	]},
+	      	{"name": "CCC", "size": 67},
+	      	{"name": "CCC", "size": 73},
+	      	{"name": "CCC", "size": 39},
+	      	{"name": "CCC", "size": 67},
+	      	{"name": "CCC", "size": 73},
+	      	{"name": "CCC", "size": 39},
+	      	{"name": "CCC", "size": 67},
+	      	{"name": "CCC", "size": 73},
+	      	{"name": "CCC", "size": 39},
+	      	{"name": "CCC", "size": 67},
+	      	{"name": "CCC", "size": 73},
+	      	{"name": "CCC", "size": 39},
+	      	{"name": "CCC", "size": 67},
+	      	{"name": "CCC", "size": 73},
+	      	{"name": "CCC", "size": 39},
+	      	{"name": "CCC", "size": 67},
+	      	{"name": "CCC", "size": 73}
+  	  ]
+	  },
+      {"name": "BBB", "size": 39},
+      {"name": "BBB", "size": 67},
+      {"name": "BBB", "size": 73}
+ ]
+};
+var width = 960,
+    height = 500,
+    color = d3.scale.category20();
+
+var treemap = d3.layout.treemap()
+    .size([width, height])
+    //.round(false)
+    .value(function(d) { return d.size; });
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+  .append("g") ;
+
+var cell = svg.selectAll("g")
+	  .data(treemap.nodes(data))
+  .enter().append("g")
+    .attr("class", "cell")
+    .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+cell.append("rect")
+    .attr("width", function(d) { return d.dx; })
+    .attr("height", function(d) { return d.dy; })
+    .style("fill", function(d) { return d.children ? color(d.name) : null; });
+
+cell.append("text")
+    .attr("x", function(d) { return d.children ? 0 :(d.dx / 2); })
+    .attr("y", function(d) { return d.children ? 0 :(d.dy / 2); })
+	.attr("dy", "1em")
+	.attr("font-size", function(d) { return d.children ? 30 :10; })
+    .text(function(d) { return d.children ? d.name : d.name; });
+</script>

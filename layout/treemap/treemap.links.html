@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+text{
+	font-weight:bold;
+	font-size:30px;
+}
+circle {
+  fill: yellow;
+  stroke: red;
+}
+path,line {
+  fill: none;
+  stroke: green;
+  stroke-width: 2;
+}
+</style>
+<body>
+<script src="../../d3.js"></script>
+<script>
+var data={
+		"name": "AAA",
+		"children": 
+		[
+		 	  { "name": "BBB", 
+		 	  	"children": 
+		 	    [
+		 	      	{"name": "CCC", 
+		 	      	"children": 
+		 	      	[
+		 	          		{"name": "DDD", 
+		 	          		 "children":
+							 [
+									{"name": "EEE", "size": 2},
+							      	{"name": "EEE", "size": 2},
+							      	{"name": "EEE", "size": 2},
+							      	{"name": "EEE", "size": 2}
+							 ]},
+					      	{"name": "DDD", "size": 4},
+					      	{"name": "DDD", "size": 2},
+					      	{"name": "DDD", "size": 4},
+					      	{"name": "DDD", "size": 2}
+		 	      	]},
+			      	{"name": "CCC", "size": 4},
+			      	{"name": "CCC", "size": 2},
+			      	{"name": "CCC", "size": 4},
+			      	{"name": "CCC", "size": 2}
+		 	  ]
+			  },
+		     {"name": "BBB", "size": 4},
+		     {"name": "BBB", "size": 2},
+		     {"name": "BBB", "size": 4}
+		]
+	};
+	
+var width = 960,
+    height = 960,
+    color = d3.scale.category20();
+
+var treemap = d3.layout.treemap()
+    .size([width, height])
+    .value(function(d) { return d.size; });
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+  .append("g")
+	.attr("transform", function(d) { return "translate(60,30)"; });
+
+var diagonal = d3.svg.diagonal()
+    .projection(function(d) { return [d.y, d.x]; });
+    
+  var nodes = treemap.nodes(data);
+  
+  svg.selectAll("path")
+    .data(treemap.links(nodes))
+  .enter().append("path")
+    .attr("d", diagonal);
+  
+ var node = svg.selectAll(".node")
+      .data(nodes)
+    .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+  node.append("circle")
+      .attr("r", 4.5);
+
+  node.append("text")
+      .attr("dx", function(d) { return d.children ? -8 : 8; })
+      .attr("dy", 3)
+      .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
+      .text(function(d) { return d.name; });   
+
+</script>

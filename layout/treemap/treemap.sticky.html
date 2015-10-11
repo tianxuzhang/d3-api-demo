@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+rect {
+  fill: none;
+  stroke: #fff;
+}
+
+</style>
+<body>
+<script src="../../d3.js"></script>
+<script>
+var data1={
+ "name": "AAA",
+ "children": 
+ [
+  	  { "name": "BBB1", 
+  	  	"children": 
+  	    [
+  	      	{"name": "CCC1", "value": 1},
+	      	{"name": "CCC2", "value": 2},
+	      	{"name": "CCC3", "value": 3},
+	      	{"name": "CCC4", "value": 2},
+	      	{"name": "CCC5", "value": 1}
+  	  ]
+	  },
+      {"name": "BBB2", "value": 1},
+      {"name": "BBB3", "value": 2},
+      {"name": "BBB4", "value": 1}
+ ]
+};
+var data2={
+	 "name": "AAA",
+	 "children": 
+	 [
+	      {"name": "BBB1", "value": 3},
+	      {"name": "BBB2", "value": 2},
+	      {"name": "BBB3", "value": 1}
+	 ]
+};
+var width = 960,
+    height = 500,
+    color = d3.scale.category20();
+
+var treemap = d3.layout.treemap()
+	//.sticky(false)
+	.sticky(true)
+    .size([width, height]);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+treemap.nodes(data1);
+//var d=treemap.nodes(data2)
+var d=treemap.value(function(){ return 1;}).nodes(data1);
+var cell = svg.selectAll("g")
+.data(d)
+.enter().append("g")
+.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+.call(position);
+
+function position(){
+	this.append("rect")
+	    .attr("width", function(d) { return d.dx; })
+	    .attr("height", function(d) { return d.dy; })
+	    .style("fill", function(d) { return d.children ? color(d.name) : null; });
+
+	this.append("text")
+	    .attr("x", function(d) { return d.children ? 0 :(d.dx / 2); })
+	    .attr("y", function(d) { return d.children ? 0 :(d.dy / 2); })
+		.attr("dy", "1em")
+		.attr("font-size", function(d) { return d.children ? 50 :30; })
+	    .text(function(d) { return d.children ? d.name : d.name; });
+}
+    
+</script>
