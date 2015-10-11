@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.node circle {
+  fill:yellow ;
+  stroke: red;
+  stroke-width: 1.5px;
+}
+
+.link {
+  fill: none;
+  stroke: green;
+  stroke-width: 1.5px;
+}
+
+</style>
+<body>
+<script src="../../d3.js"></script>
+<script>
+
+var root = {
+  children: [
+    {
+      children: [
+        {value: 1,name :"AAA"},
+        {value: 2,name :"BBB"},
+        {value: 3,name :"CCC"}
+      ]
+    },
+    {
+      children: [
+    	{value: 4,name :"DDD"},
+    	{value: 5,name :"EEE"}
+    ]
+    },
+    {
+      children: [
+    	{value: 6,name :"FFF"},
+    	{value: 7,name :"GGG"}
+    ]
+    }
+  ]
+};
+
+var width = 960,
+    height = 500;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+
+var pack = d3.layout.pack()
+    .size([width/2, height/2]);
+
+var cluster=d3.layout.cluster();
+
+var nodes=pack.nodes(root);
+var links=cluster.links(nodes);
+var diagonal = d3.svg.diagonal()
+    .projection(function(d) { return [d.y, d.x]; });
+svg.selectAll("path")
+    .data(links)
+  .enter().append("path")
+    .attr("class", "link")
+    .attr("d", diagonal);
+    
+  var node = svg.selectAll(".node")
+      .data(nodes)
+    .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+  node.append("circle")
+      .attr("r", 4.5);
+
+  node.append("text")
+      .attr("dx", function(d) { return d.children ? -8 : 8; })
+      .attr("dy", 3)
+      .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
+      .text(function(d) { return d.name; });
+</script>

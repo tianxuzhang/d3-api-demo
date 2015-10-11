@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+circle {
+  stroke: #000;
+}
+</style>
+<body>
+<script src="../../d3.js"></script>
+<script>
+
+var root = {
+  children: [
+    {
+      children: [
+        {value: 1},
+        {value: 1},
+        {value: 1}
+      ]
+    },
+    {
+      children: [
+    	{value: 1},
+    	{value: 2}
+    ]
+    }
+  ]
+};
+
+var width = 960,
+    height = 500;
+
+var color =d3.scale.category20();
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+
+var pack = d3.layout.pack()
+	.radius([50])
+    .size([width, height]);
+
+svg.selectAll("circle")
+    .data(pack.nodes(root))
+  .enter().append("circle")
+    .attr("cx", function(d) { return d.x; })
+    .attr("cy", function(d) { return d.y; })
+    .attr("r", function(d) { return d.r; })
+    .attr("fill", function(d,i) { return color(i); });
+
+</script>
