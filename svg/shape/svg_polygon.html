@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - svg:polygon</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')	
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			svg.append('polygon')
+				.attr({
+					//polygon从点(100,100)到(150,150)到(200,100)到(250,150)到(300,100)，自动闭合
+					"points": "100,100 150,150 200,100 250,150 300,100 "
+				})
+				.style({
+					//polygon颜色：tomato
+					"stroke": "tomato",
+					//polygon粗细：5
+					"stroke-width": 5,
+					//polygon填充：white
+					"fill": "white"
+				});
+		</script>
+	</body>
+</html>

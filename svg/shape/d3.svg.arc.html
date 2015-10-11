@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - d3.svg.arc</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var color=d3.scale.category20();	//颜色比例尺
+			var length=8;	//圆弧数量
+			var per=2*Math.PI/length;	//每份所占弧度
+			var data = d3.range(length).map(function(i){	//生成圆弧数据
+				return {
+						innerRadius:45,
+						outerRadius:45+15*(i+1),
+						startAngle:per*i,
+						endAngle:per*(i+1)
+					}
+				});
+			var svg = d3.select('body')
+				.append('svg')	//向body标签增加svg子元素
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+			//弧生成器
+			var arc = d3.svg.arc();
+			var arcs=svg.selectAll('path')
+					.data(data)
+					.enter()
+					.append('path')
+				    .attr({
+						"transform": "translate(150,200)",
+						"d": function (d) { return arc(d); },	//生成弧路径数据
+						"fill": function(d,i){ return color(i);}	//指定填充颜色
+					});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>D3.svg - d3.svg.line.radial.defined</title>
+		<style type="text/css">
+			.line {
+			  fill: none;
+			  stroke: steelblue;
+			  stroke-width: 5px;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+
+			var svg = d3.select("body").append("svg")
+				.attr("width", 960)
+				.attr("height", 500)
+				.append("g");
+
+			var per=2 * Math.PI/4;
+
+			var arr=[
+				{r:100,angle:per*0},
+				{r:100,angle:per*1},
+				{r:100,angle:per*2},
+				{r:100,angle:per*3},
+				{r:100,angle:per*4}
+			];
+
+			var line = d3.svg.line.radial();
+				line.radius(function(d, i) { return d.r; });
+				line.angle(function(d, i) { return d.angle; });
+				line.interpolate('cardinal');
+				line.defined(function (d, i) {
+					return i !=4;
+				});
+
+			svg.append("path") 
+				.attr("class", "line")
+				.attr("d", line(arr))
+				.attr("transform", "translate(200,200)");
+
+		</script>
+	</body>
+</html>

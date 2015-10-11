@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>D3.svg - d3.svg.line.radial</title>
+		<style type="text/css">
+			.line {
+			  fill: none;
+			  stroke: steelblue;
+			  stroke-width: 5px;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+
+			var svg = d3.select("body").append("svg")
+				.attr("width", 960)
+				.attr("height", 500)
+				.append("g");
+
+			var per=2 * Math.PI/4;
+
+			var arr=[
+				{r:100,angle:per*0},
+				{r:100,angle:per*1},
+				{r:100,angle:per*2},
+				{r:100,angle:per*3},
+				{r:100,angle:per*4}
+			];
+
+			//新建一个径向面积的路径生成器
+			var area = d3.svg.area.radial();
+				area.angle(function(d, i) { return d.angle; });	//设置径向面积的角度
+				area.innerRadius(function(d) { return 20; });	//设置径向面积的内半径
+				area.outerRadius(function(d) { return 50; });	//设置径向面积的外半径
+			//生成径向面积的路径
+			svg.append("path") 
+				.attr("fill", "tomato")
+				.attr("d", area(arr))
+				.attr("transform", "translate(200,200)");
+
+		</script>
+	</body>
+</html>

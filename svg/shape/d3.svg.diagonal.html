@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>D3.svg - d3.svg.diagonal</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+			//生成对角线路径的数据
+			var data = [
+				{source: {x: 50, y: 50},target: {x: 190, y: 190}},
+				{source: {x: 80, y: 50},target: {x: 220, y: 190}},
+				{source: {x: 110, y: 50},target: {x: 250, y: 190}},
+				{source: {x: 140, y: 50},target: {x: 280, y: 190}},
+			];
+			//对角线路径生成器
+			var diagonal = d3.svg.diagonal();
+			//生成对角线路径
+			svg.selectAll('path').data(data).enter().append('path')
+				.attr({
+					"transform": "translate(100,100)",
+					"d": diagonal,
+					"stroke": 'steelblue',
+					"stroke-width": 2,
+					"fill": "none"
+				});
+		</script>
+	</body>
+</html>

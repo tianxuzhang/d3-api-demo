@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>D3.svg - d3.svg.line.defined()</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var svg = d3.select('body')
+				.append('svg')	//向body标签增加svg子元素
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			//自定义数据结构
+			var json = [
+				{x: 100, y: 100},
+				{x: 150, y: 150},
+				{x: 200, y: 100},
+				{x: 250, y: 150},
+				{x: 300, y: 100},
+				{x: 350, y: 150}
+			];
+			//构造默认线性生成器
+			var line = d3.svg.line();
+			//指定x存取器为：取每个数据元素的x属性的值
+			line.x(function (d, i) { return d.x; })
+			//指定y存取器为：取每个数据元素的y属性的值
+			line.y(function (d, i) { return d.y; });
+
+			//设置插值模式，即：线的形状
+			line.interpolate("cardinal");
+			//设置线的张力
+			line.tension(0.5);
+			//设置数据值的刚问方式，这里设置：只使用前5个数据
+			line.defined(function (d, i) {
+				return i <= 4;
+			});
+
+			svg.append('path')
+				.attr({
+					//生成路径数据
+					"d": function () { return line(json); },
+					"transform": "translate(0,0)",
+				})
+				.style({
+					//path颜色：orange
+					"stroke": "orange",
+					//path粗细：1
+					"stroke-width": 1,
+					//path填充：white
+					"fill": "white"
+				});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - svg:path</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<svg class="book-d3">
+			</svg>
+		</div>
+
+		<script type="text/javascript">
+			var svg = d3.select('body')
+				.append('svg')	//向body标签增加svg子元素
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			svg.append('path')
+				.attr({
+					//path从点(100,100)到(150,150)到(200,100)到(250,150)到(300,100)
+					"d": "M100,100 L150,150 L200,100 L250,150 L300,100 ",
+					//path平移：水平向右100，竖直向下50
+					"transform": "translate(100,50)"
+				})
+				.style({
+					//path颜色：skyblue
+					"stroke": "skyblue",
+					//path粗细：5
+					"stroke-width": 5,
+					//path填充：white
+					"fill": "white"
+				});
+		</script>
+	</body>
+</html>

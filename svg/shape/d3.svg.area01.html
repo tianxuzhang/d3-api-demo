@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - d3.svg.area01</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//生成面积图的数据
+			var data = [
+				{x: 100, y: 100},	{x: 150, y: 150},	{x: 200, y: 100},
+				{x: 250, y: 150},	{x: 300, y: 100},	{x: 350, y: 150}
+			];
+			//追加svg元素
+			var svg = d3.select("body").append("svg")
+				.datum(data)
+				.attr("width", 960)
+				.attr("height", 500)
+			  .append("g")
+				.attr("transform", "translate(10,10)");
+			//新建面积生成器	
+			var area = d3.svg.area() 
+				.x(function (d) { return d.x; })//x坐标
+				.y1(function(d) { return d.y; })//顶线
+				.y0(300);//基线
+			//追加路径数据
+			svg.append("path")
+				.attr("fill", "steelblue")
+				.attr("d", area);
+		</script>
+	</body>
+</html>

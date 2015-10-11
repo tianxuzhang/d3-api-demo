@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - symbol.type([type])01</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var svg = d3.select('body')
+				.append('svg')	//向body标签增加svg子元素
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+			//颜色比例尺
+			var color=d3.scale.category20();
+			
+			//要添加的符号数量
+			var symbols=d3.range(200);
+				
+			//构造符号路径生成器
+			var symbol = d3.svg.symbol()
+				//指定符号类型为：5种类型中随机选择一个
+				.type(function(){
+					return d3.svg.symbolTypes[~~(Math.random() * d3.svg.symbolTypes.length)]
+				});
+				
+			//添加符号路径
+			svg.selectAll('path')
+				.data(symbols)
+				.enter()
+				.append('path')
+				.attr({
+					"transform": function(d){return "translate("+Math.random() * 600+100+","+Math.random() * 400+100+")";},
+					"d": symbol,
+					"stroke": function(d,i){return color(i);},
+					"stroke-width":2,
+					"fill":"none"
+				});
+		</script>
+	</body>
+</html>
+

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>D3.svg - d3.svg.chord</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var svg = d3.select("body")
+			.append("svg")
+			.attr({
+					"width": 700,
+					"height": 500,
+				});
+			//颜色比例尺
+			var color=d3.scale.category20c();
+			var length=20;	
+			var data=d3.range(length);
+			var pi = Math.PI/length;
+			//弦路径数据生成器
+			var chord = d3.svg.chord()
+				.source(function(){return {
+					start:-2*pi+Math.PI,
+					end:-pi+Math.PI
+				}})
+				.target(function(d,i){return {
+					start:pi+Math.PI,
+					end:2*pi+Math.PI
+				}})
+				//指定半径存取器，设置半径依次增加
+				.radius(function (d, i) { return length*i; })
+				.startAngle(function (d, i) { return d.start; })
+				.endAngle(function (d, i) { return d.end; });
+			//弦路径	
+			svg.selectAll("path").data(data).enter().append("path")
+				.attr("d", chord)
+				.attr("transform",function(d,i){ return "translate(350,"+(length-i)*length+")";})
+				.attr("fill",function(d,i){ return color(i);});
+		</script>
+	</body>
+</html>

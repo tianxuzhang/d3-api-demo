@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - chord accessor</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//svg容器
+			var svg = d3.select("body")
+			.append("svg")
+			.attr({
+					"width": 700,
+					"height": 500,
+				});
+			//颜色比例尺
+			var color=d3.scale.category20c();
+			var length=20;	
+			var data=d3.range(length);
+			var pi = Math.PI/length;
+			
+			//自定义访问器构建弦路径生成器
+			var chord = d3.svg.chord()
+				.source(function(){return {
+					start:Math.PI,
+					end:Math.PI+pi
+				}})
+				.target(function(d,i){return {
+					start:-Math.PI/2+i*pi,
+					end:-Math.PI/2+(i+0.5)*pi
+				}})
+				.radius(200)
+				.startAngle(function (d, i) { return d.start; })
+				.endAngle(function (d, i) { return d.end; });
+			//弦路径	
+			svg.selectAll("path").data(data).enter().append("path")
+				.attr("d", chord)
+				.attr("transform", "translate(350,350)")
+				.attr("fill",function(d,i){ return color(i);});
+		</script>
+	</body>
+</html>

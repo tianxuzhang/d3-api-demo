@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - svg:rect</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<svg class="book-d3">
+			</svg>
+		</div>
+
+		<script type="text/javascript">
+			var svg = d3.select('body')
+				.append('svg')	//向body标签增加svg子元素
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			svg.append('rect')
+				.attr({
+					//rect左上角坐标：(100,100)
+					"x": 100, "y": 100,
+					//rect宽度：100
+					"width": 100,
+					//rect高度：50
+					"height": 50,
+					//rect水平圆角：5
+					"rx":5,
+					//rect竖直圆角：10
+					"ry": 10
+				})
+				.style({
+					//rect边框颜色：red
+					"stroke": "red",
+					//rect边框粗细：4
+					"stroke-width": 4,
+					//rect虚线边框虚线宽10px，空白宽5px
+					"stroke-dasharray": "10 5",
+					//rect填充：yellow
+					"fill": "yellow"
+				});
+		</script>
+	</body>
+</html>

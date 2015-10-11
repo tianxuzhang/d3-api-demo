@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>D3.svg - diagonal.projection([projection])</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var svg = d3.select('body')
+				.append('svg')	//向body标签增加svg子元素
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			var color = d3.scale.category10();
+			
+			var data = [//径向对角线路径的数据
+			        	{source: {x: 0, y: 0},target: {x: 100, y: 60}},
+			        	{source: {x: 0, y: 60},target: {x: 100, y: 120}},
+			        	{source: {x: 0, y: 120},target: {x: 100, y: 180}},
+			        	{source: {x: 0, y: 180},target: {x: 100, y: 240}},
+			        	{source: {x: 0, y: 240},target: {x: 100, y: 300}},
+			        	{source: {x: 0, y: 300},target: {x: 100, y: 360}},
+			        ];
+
+			//-----构造径向面积生成器
+			var diagonal = d3.svg.diagonal.radial() 
+				//指定来源存取器为：常量对象
+				.source(function (d, i) { return d.source; })
+				//指定来源存取器为：常量对象
+				.target(function (d, i) { return d.target; })
+				//指定半径存取器为：取对象的radius属性值
+				.projection(function(d) {	//转为笛卡尔坐标
+					return [d.x, d.y / 180 * Math.PI]; 
+				});
+
+			svg.selectAll('path').data(data).enter().append('path')
+				.attr({
+					"transform": "translate(100,100)",
+					"d": function (d) { return diagonal(d); },
+					"fill": function(d,i){ return color(i); }
+				});
+		</script>
+	</body>
+</html>

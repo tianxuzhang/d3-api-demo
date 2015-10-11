@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - svg:polyline</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var svg = d3.select('body')
+				.append('svg')	//向body标签增加svg子元素
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			svg.append('polyline')
+				.attr({
+					//polyline从点(100,100)到(150,150)到(200,100)到(250,150)到(300,100)
+					"points": "100,100 150,150 200,100 250,150 300,100 "
+				})
+				.style({
+					"stroke": "tomato",//polyline颜色：tomato
+					"stroke-width": 5, //polyline粗细：5
+					"fill": "white"//polyline填充：white
+				});
+
+		</script>
+	</body>
+</html>

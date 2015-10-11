@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - d3.svg.line</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			//默认数据结构
+			var array = [
+				[100, 100],
+				[150, 150],
+				[200, 100],
+				[250, 150],
+				[300, 100],
+				[350, 150]
+			];
+			//构造默认线性生成器
+			var line = d3.svg.line();
+			//增加折线
+			svg.append('path')
+				.attr({
+					"d": function () { return line(array); },
+					"transform": "translate(0,0)",
+				})
+				.style({
+					//path颜色：steelblue
+					"stroke": "steelblue",
+					//path粗细：5
+					"stroke-width": 5,
+					//path填充：white
+					"fill": "white"
+				});
+		</script>
+	</body>
+</html>

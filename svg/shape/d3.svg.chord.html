@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - d3.svg.chord</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var svg = d3.select('body')
+				.append('svg')	//向body标签增加svg子元素
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+			//默认的弦数据结构
+			var data={
+				source: {
+					radius:100,
+					startAngle:Math.PI / 4,
+					endAngle:Math.PI / 3
+				},
+				target: {
+					radius:100,
+					startAngle:0,
+					endAngle:Math.PI / 16
+				}
+			};
+
+			//弦路径数据生成器
+			var chord = d3.svg.chord();
+			svg.append('path')
+				.attr({
+					"transform": "translate(120,120)",
+					"d": chord(data),//生成弦路径数据
+					"stroke": 'steelblue',
+					"stroke-width": 2,
+					"fill": "none"
+				});
+		</script>
+	</body>
+</html>

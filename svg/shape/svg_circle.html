@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>D3.svg - svg:circle</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var svg = d3.select('body')
+				.append('svg')	//向body标签增加svg子元素
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			svg.append('circle')
+				.attr({
+					"cx": 100, "cy": 100,	//circle圆心坐标：(100,100)
+					"r": 50,	//circle半径：50
+				})
+				.style({
+					"stroke": "wheat",	//circle边框颜色：wheat
+					"stroke-width": 5,	//circle边框粗细：5
+					"fill": "yellowgreen"	//circle填充：yellowgreen
+				});
+
+		</script>
+	</body>
+</html>

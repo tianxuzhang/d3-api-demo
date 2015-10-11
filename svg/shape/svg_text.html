@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - svg:text</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+			
+			var anchor=["start","middle","end"];
+			var fill=["none","tomato","aqua"];
+			var stoke=["red","none","blue"];
+			var writing_mode=["","tb",""];
+			var font_size=["100","60","100"];
+			
+			svg.selectAll("text").data(anchor).enter().append('text')
+				.attr({"x": 150, "y": function(d,i){ return 60+150*i;}}) 	//文本位置
+				.style({
+					"text-anchor": function(d){return d;},	//文本对齐方式
+					"font-size": function(d,i){return font_size[i];},	//文本字体大小
+					"writing-mode": function(d,i){return writing_mode[i];},	//文本书写格式
+					"stroke": function(d,i){return stoke[i];},	//文本描边色
+					"fill": function(d,i){return fill[i];}	//文本填充色
+					})
+				.text(function(d){return d;});	//文本内容
+
+		</script>
+	</body>
+</html>
