@@ -2,7 +2,7 @@
 《D3 API 详解》随书源码。源码按照[D3.js官方API文档](https://github.com/mbostock/d3/wiki)的组织结构一一介绍。如有纰漏还请指教！
 
 # Dependencies
-* [d3.js 3.5.5](https://github.com/mbostock/d3)
+* [d3.js 3.5.5](https://github.com/mbostock/d3/releases/download/v3.5.5/d3.zip)
 * [d3 wiki](https://github.com/mbostock/d3/wiki)
 
 # Contents
@@ -22,6 +22,9 @@
 * 第七章 几何
 
 * 第八章 行为
+
+# License
+*[ Apache License Version 2.0](https://github.com/tianxuzhang/d3-api-demo/blob/master/LICENSE)
 
 # References 
 
