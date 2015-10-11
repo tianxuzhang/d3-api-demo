@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="../../d3.js"></script>
+<script>
+var width = 960,
+    height = 960;
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+    
+var color=d3.scale.category20c();
+var projection1 = d3.geo.orthographic()
+	.translate([150,150]);
+var path1 = d3.geo.path()
+	.projection(projection1);
+	
+var projection2 = d3.geo.mercator()
+	.translate([550,150])
+	.scale(50);
+var path2 = d3.geo.path().projection(projection2);
+
+var graticule = d3.geo.graticule();
+
+svg.append("path")
+	.datum(graticule)
+	.attr("stroke","#ed6d3d")
+	.attr("fill","none")
+	.attr("stroke-width","2")
+	.attr("d", path1);
+
+svg.append("path")
+	.datum(graticule)
+	.attr("stroke","#5c9291")
+	.attr("stroke-width","2")
+	.attr("d", path2);
+
+</script>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+path{
+	stroke:#ed6d3d;
+	fill:none;
+	stroke-width:2
+}
+</style>
+<body>
+<script src="../../d3.js"></script>
+<script>
+var width = 960,
+    height = 960;
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+    
+var color=d3.scale.category20c();
+var projection = d3.geo.orthographic()
+	.translate([150,150]);
+
+var path = d3.geo.path()
+	.projection(projection);
+	
+var graticule = d3.geo.graticule()
+					.majorExtent([[-50, -90], [-20, 50]]);
+					
+svg.selectAll('path')
+	.data(graticule.lines())
+	.enter()
+	.append("path")
+	.attr("d", function(d){ 
+		return path(d);
+	});
+
+</script>
