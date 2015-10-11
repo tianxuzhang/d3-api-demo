@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - d3.svg.brush()</title>
+		<style type="text/css">
+			.domain,
+			.tick path,
+			.tick line {
+			  fill: none;
+			  stroke: #000;
+			  stroke-width: 1;
+			  shape-rendering: crispEdges;
+			}
+			svg rect{
+				fill: white;
+				stroke: black;
+				stroke-width: 2;
+			}
+
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 700,
+					"height": 500,
+				}).append('g').attr('transform', 'translate(10, 200)');
+
+			var x = d3.scale.identity().range([0, 500]);
+			//构造刷子
+			var brush = d3.svg.brush().x(x).y(x);
+			brush(svg);	//在SVG元素上绘制刷子
+
+		</script>
+	</body>
+</html>

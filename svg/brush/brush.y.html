@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>D3.svg - brush.y([scale])</title>
+		<style type="text/css">
+			line{
+				stroke: #7CC4FF;
+				stroke-width: 1;
+			}
+			svg rect{
+				fill: white;
+				stroke: black;
+				stroke-width: 2;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')	
+				.attr({
+					"width": 500,
+					"height": 500,
+				});
+
+			//构造恒等比例尺变换
+			var scale = d3.scale.identity().range([0, 300]);
+			
+			//构造拖选器
+			var brush = d3.svg.brush()
+				.x(scale).y(scale);
+			
+			//绘制brush
+			brush(svg);
+		</script>
+	</body>
+</html>

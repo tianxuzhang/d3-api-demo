@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - brush.on(type[, listener])</title>
+		<style type="text/css">
+			.domain,
+			.tick path,
+			.tick line {
+			  fill: none;
+			  stroke: #000;
+			  stroke-width: 1;
+			  shape-rendering: crispEdges;
+			}
+			g rect{
+				fill: white;
+				stroke: green;
+				stroke-width: 2;
+				height: 50px;
+			}
+			circle.hidden {
+			  fill: lavender !important;
+			  stroke-width:0;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//svg的高，宽，边距
+			var margin = {top: 50, right: 50, bottom: 50, left: 50},
+				width = 960 - margin.left - margin.right,
+				height = 500 - margin.top - margin.bottom;
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": width + margin.left + margin.right,
+					"height": height + margin.top + margin.bottom,
+				})
+				.append("g")
+				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+			var color=d3.scale.category10();
+			var data=d3.range(100).map(function(){
+				return {
+					cx:Math.random()*width/2,
+					cy:Math.random()*height/2,
+					r:Math.random()*10,
+					color:color(Math.random()*10)
+				}
+			});
+			//线性比例尺
+			var x = d3.scale.linear().domain([0, 50]).range([0, width/2]);
+			var y = d3.scale.linear().domain([0, 50]).range([height/2,0]);
+			var x2 = d3.scale.linear().domain([d3.min(data,function(d){return d.r}), d3.max(data,function(d){return d.r})]).range([0, width/2]);
+			//轴
+			var xAxis = d3.svg.axis().scale(x);
+			var xAxis2 = d3.svg.axis().scale(x2);
+			var yAxis = d3.svg.axis().scale(y).orient("left");
+			//拖选器
+			var brush = d3.svg.brush()
+						.x(x2)
+						.extent([1,2]);
+			//小散点图
+			svg.append('g').attr('transform', 'translate(0,'+(height/2)+')').call(xAxis);
+			svg.append('g').call(yAxis);
+			//半径范围
+			svg.append('g').attr('transform', 'translate(0,'+(height/2+100)+')').call(xAxis2);
+			//散点
+			var containt=svg.append('g');
+
+			function draw(data){
+				containt.selectAll("circle").data(data).enter().append("circle").attr({
+					cx:function(d){ return d.cx;},
+					cy:function(d){ return d.cy;},
+					r:function(d){ return d.r;},
+					fill:function(d){ return d.color;}
+				});
+				
+				containt.selectAll("circle").data(data).exit().remove();
+			
+			}
+			draw(data);
+			//将拖选单独绘制在一个g里
+			var g = svg.append('g').attr("transform","translate(0,"+(height/2+70)+")");
+			//绘制brush
+			g.call(brush).call(brush.event);
+			//调整拖选的范围、背景、按钮矩形等高度
+			g.selectAll('rect').attr({
+				"height": 30
+			});
+			
+			//选择刷事件
+			brush.on('brushstart', function() {//开始时所有圆点样式类为hidden
+				svg.selectAll("circle").classed("hidden",true);
+			}).on('brush', function() {//移动时设置选择范围内的圆点取消hidden样式类
+				var e = brush.extent();
+				svg.selectAll("circle").classed("hidden", function(d) {
+					return e[0] > d.r || d.r > e[1];
+				});
+			}).on('brushend', function() {//结束时设置选中元素描边属性
+				svg.selectAll("circle").attr({
+					"stroke":"#000","stroke-width":1
+				});
+			});
+		</script>
+	</body>
+</html>

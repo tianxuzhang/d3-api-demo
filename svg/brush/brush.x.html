@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - d3.svg.brush.x()</title>
+		<style type="text/css">
+			.domain,
+			.tick path,
+			.tick line {
+			  fill: none;
+			  stroke: #000;
+			  stroke-width: 1;
+			  shape-rendering: crispEdges;
+			}
+			svg rect{
+				fill: white;
+				stroke: green;
+				stroke-width: 2;
+			}
+
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 700,
+					"height": 500,
+				}).append('g').attr('transform', 'translate(10, 200)');
+
+			//构造线性比例尺
+			var x = d3.scale.linear().domain([0, 50]).range([0, 500]);
+			var brush = d3.svg.brush().x(x);
+			brush(svg);	//在SVG元素上绘制刷子
+			//构造轴组件
+			var xAxis = d3.svg.axis().scale(x);
+			svg.append('g').call(xAxis).attr('transform', 'translate(0, 50)');
+			//调整拖选的背景矩形的高度
+			svg.selectAll('rect').attr({
+				"height": 50,
+			});
+		</script>
+	</body>
+</html>
