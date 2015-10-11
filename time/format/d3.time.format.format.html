@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>D3.Time - d3.time.formatting</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var svg = d3.select('body')
+				.append('svg')	//向body标签增加svg子元素
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			//-----构造时间格式化器
+			var format = d3.time.format("%Y-%m-%d");
+			//格式化日期对象，返回2011-01-01
+			var fStr = format(new Date(2011,01,1));
+			
+
+			//----print all results
+			console.log("[format]返回类型：" + typeof fStr);
+			console.log("\t返回值：" + fStr);
+		</script>
+	</body>
+</html>

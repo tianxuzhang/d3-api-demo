@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>time - d3.time.format.multi(formats)</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			//多功能时间格式化器
+			var customFormat = d3.time.format.multi([
+					//如果需要格式化的日期中，秒不为0
+					["%Y-%m-%d %H:%M:%S", function (d) {
+						return d.getSeconds() && d.getSeconds() > 0;
+					}],
+					//如果需要格式化的日期中，分不为0
+					["%Y-%m-%d %H:%M", function (d) {
+						return d.getMinutes() && d.getMinutes() > 0;
+					}],
+					//如果需要格式化的日期中，时不为0；并且，为了美观，在小时后补位：":00"
+					["%Y-%m-%d %H:00", function (d) {
+						return d.getHours() && d.getHours() > 0;
+					}],
+					//这里，因为getDate返回值肯定大于1，所以，这个格式化器是必用的
+					["%Y-%m-%d", function (d) {
+						return d.getDate() && d.getDate() > 1;
+					}],
+					//以下的格式化器都不会再用了，因为上面的格式化器肯定会用
+					//除非，将上面的格式化器改为：return d.getDate() && d.getDate() > 1
+					//不过，最后一个格式化器又用不到了，因为d.getMonth()的返回也是必大于1
+					["%Y-%m", function (d) {
+						return d.getMonth();
+					}],
+					["%Y", function (d) {
+						return true;
+					}]
+				]);
+			//这里返回的是字符串；注意：这里传入的参数 必须是Date对象实例
+			//因为，下面的用法相当于format()，而不是format.parse()
+			var mfStr = customFormat(new Date(2011, 01, 01, 12));
+
+			//输出结果
+			console.log("[multi format]返回类型：" + typeof mfStr);
+			console.log("\t返回值：" + mfStr);
+		</script>
+	</body>
+</html>
