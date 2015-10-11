@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="../../d3.js"></script>
+<script>
+var nodeNum=100,linkNum=1000;
+//节点和连接数据
+var nodes=d3.range(nodeNum).map(function(d){ return {'num':d}});
+var links=d3.range(1000).map(function(d){ 
+		return {
+			'source':Math.round(Math.random()*100),
+		   	'target':Math.round(Math.random()*100)
+		   	}
+		});
+var data={	//节点
+  "nodes":nodes,
+  "links":links//连接
+};
+
+//SVG的尺寸
+var width = 960,    height = 500;
+
+//定义力布局
+var force = d3.layout.force()
+    .size([width, height]);
+
+//定义颜色比例尺
+var color=d3.scale.category20c();
+
+//绘制一个svg
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+//加载数据，启动力布局
+force.nodes(data.nodes)
+     .links(data.links)
+     .start();
+     
+//绘制连接线
+var link = svg.selectAll(".link")
+    .data(data.links)
+  .enter().append("line")
+    .attr("stroke", "#ccc");
+
+//绘制节点
+var node = svg.selectAll(".node")
+    .data(data.nodes)
+  .enter().append("circle")
+    .attr("fill", function(d,i){ return color(i);})
+    .attr("r", 5)
+	.attr("stroke","black")
+	.attr("stroke-width",1);
+
+//按照力布局的节拍移动线和点的位置，直到收敛
+force.on("tick", function() {
+  link.attr("x1", function(d) { return d.source.x; })
+      .attr("y1", function(d) { return d.source.y; })
+      .attr("x2", function(d) { return d.target.x; })
+      .attr("y2", function(d) { return d.target.y; });
+
+  node.attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; });
+});
+
+</script>
