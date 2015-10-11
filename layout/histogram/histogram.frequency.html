@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+.bar text{
+	font-weight:bold;
+	font-size:20px;
+}
+.bar rect {
+  fill: #95859c;
+  shape-rendering: crispEdges;
+}
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+</style>
+<body>
+<script src="../../d3.js"></script>
+<script>
+var values = [0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,0.2,0.3,0.4,
+				0.5,0.5,0.5,0.5,0.5,0.1,0.1,0.7,0.7,0.7,0.6,0.4,0.8];
+
+var width = 960,
+    height = 500,
+    padding=6;
+    
+var x = d3.scale.linear()
+    .domain([0, 1])
+    .range([0, width/2]);
+    
+var format = d3.format(".2f");
+
+var data = d3.layout.histogram()
+    .bins(x.ticks(10))
+//  .frequency(false)	//频率
+   .frequency(true)	//频数，默认情况
+    (values);
+    
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+    
+var y = d3.scale.linear()
+    .domain([0, 0.01+d3.max(data, function(d) { return d.y; })])
+    .range([height, 0]);
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width+30)
+    .attr("height", height+30)
+  .append("g")
+    .attr("transform", "translate(" + padding*10 + "," + padding + ")");
+    
+var bar = svg.selectAll(".bar")
+    .data(data)
+  .enter().append("g")
+    .attr("class", "bar")
+    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+bar.append("rect")
+ 	.attr("x",padding)
+    .attr("width", x(data[0].dx)-1)
+    .attr("height", function(d) { return height - y(d.y); });
+
+bar.append("text")
+    .attr("dy", ".75em")
+    .attr("y", 6)
+    .attr("x", x(data[0].dx) / 2)
+    .attr("text-anchor", "middle")
+    .text(function(d) { return format(d.y); })
+    .attr("fill", "#fff");
+
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate("+padding+"," + height + ")")
+    .call(xAxis);
+
+svg.append("g")
+    .attr("class", "y axis")
+    .attr("transform", "translate("+padding+"," + 0 + ")")
+    .call(yAxis);
+</script>
