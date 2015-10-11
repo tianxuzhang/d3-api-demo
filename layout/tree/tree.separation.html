@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<style>
+
+.node circle {
+  fill:yellow ;
+  stroke: red;
+  stroke-width: 1.5px;
+}
+
+.link {
+  fill: none;
+  stroke: green;
+  stroke-width: 1.5px;
+}
+
+</style>
+<script src="../../d3.js"></script>
+<script>
+var root = {
+  children: [
+    {
+      children: [
+        {value: 1,name :"AAA"},
+        {value: 2,name :"BBB"},
+        {value: 3,name :"CCC"}
+      ]
+    },
+    {
+      children: [
+    	{value: 4,name :"DDD"},
+    	{value: 5,name :"EEE"}
+    ]
+    },
+    {
+      children: [
+    	{value: 6,name :"FFF"},
+    	{value: 7,name :"GGG"}
+    ]
+    }
+  ]
+};
+
+var diameter = 960; 
+var tree = d3.layout.tree()
+    .nodeSize([2,200])
+ 	.separation(function separation(a, b) {
+  		//return (a.parent == b.parent ? 10 : 2) / a.depth;
+ 		return (a.parent == b.parent ? 2 : 10) / a.depth;
+	});
+
+var diagonal = d3.svg.diagonal.radial() 
+    .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; }); 
+   
+var svg = d3.select("body").append("svg")
+    .attr("width", diameter)
+    .attr("height", diameter)
+  	.append("g")
+    .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
+
+  var nodes = tree.nodes(root), links = tree.links(nodes); 
+  var link = svg.selectAll(".link")
+      .data(links)
+    .enter().append("path")
+      .attr("class", "link")
+      .attr("d", diagonal);
+  var node = svg.selectAll(".node")
+      .data(nodes)
+   	  .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+  node.append("circle")
+      .attr("r", 4.5);
+</script>
