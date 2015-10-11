@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - axis.tickFormat([format])</title>
+		<style type="text/css">
+			.domain,
+			.tick path,
+			.tick line {
+			  fill: none;
+			  stroke: #000;
+			  stroke-width: 2;
+			  shape-rendering: crispEdges;
+			}
+			body{
+			  font-weight:bold;
+			}				
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var width=1200,height=500;
+			
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": width,
+					"height": height,
+				});
+			
+			//构造比例尺
+			var timeScale = d3.time.scale().domain([new Date(2016, 1, 1), new Date(2016, 5, 1)]).range([0, width/2]);
+			var logScale = d3.scale.log().domain([1, 100]).range([0, width/2]);
+			var linearScale = d3.scale.linear().domain([0, 1]).range([0, width/2]);
+			
+			//轴
+			var timeAxis=d3.svg.axis().scale(timeScale).orient("bottom");
+			var logAxis=d3.svg.axis().scale(logScale).orient("bottom");
+			var linearAxis=d3.svg.axis().scale(linearScale).orient("bottom");
+			
+			//设置轴的刻度
+			timeAxis.ticks(d3.time.months);
+			linearAxis.ticks(10);
+			logAxis.ticks(10, "e");	//显示指数形式
+			timeAxis.tickFormat(d3.time.format("%b"));	//显示月份简称
+			linearAxis.tickFormat(d3.format(".0%"));	//显示百分数
+			
+			//绘制轴
+			svg.append('g').attr('transform', 'translate(50, 100)').call(timeAxis);
+			svg.append('g').attr('transform', 'translate(50, 200)').call(logAxis);
+			svg.append('g').attr('transform', 'translate(50, 300)').call(linearAxis);
+		</script>
+	</body>
+</html>

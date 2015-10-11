@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - axis.outerTickSize([size])</title>
+		<style type="text/css">
+			.domain,
+			.tick path,
+			.tick line {
+			  fill: none;
+			  stroke: #000;
+			  stroke-width: 2;
+			  shape-rendering: crispEdges;
+			}
+			body{
+			  font-weight:bold;
+			}				
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var width=1200,height=500;
+			
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": width,
+					"height": height,
+				});
+				
+			//构造序数比例尺
+			var linearScale = d3.scale
+				.linear()
+				.domain([0,10])
+				.range([0, width/2]);
+			
+			//轴
+			var xAxis=d3.svg.axis()
+				.scale(linearScale)
+				.orient("bottom");
+			
+			////设置轴的外刻度长度为反方向50像素
+			xAxis.outerTickSize(-50);
+			
+			//绘制轴
+			svg.append('g')
+				.attr('transform', 'translate(50, 220)')
+				.call(xAxis);
+		</script>
+	</body>
+</html>

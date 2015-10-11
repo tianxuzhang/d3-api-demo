@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - d3.svg.axis</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 960,
+					"height": 500,
+				});
+			//构造轴组件
+			var xAxis = d3.svg.axis()
+				//指定恒等比例尺
+				.scale(d3.scale.identity().domain([0, 500]));
+			svg.append('g')
+				.attr('transform', 'translate(10, 100)')
+				//调用轴
+				.call(xAxis);
+		</script>
+	</body>
+</html>

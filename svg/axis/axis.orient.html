@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - axis.orient([orientation])</title>
+		<style type="text/css">
+			.domain,
+			.tick path,
+			.tick line {
+			  fill: none;
+			  stroke: #000;
+			  shape-rendering: crispEdges;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+			//构造线性比例尺
+			var scale = d3.scale.linear().range([0, 100]).domain([0, 10]);
+			//四种方位的轴
+			var orient=["left","right","top","bottom"];
+			var axis=d3.range(orient.length).map(function(i){
+				return d3.svg.axis().scale(scale).orient(orient[i])
+			});
+			//绘制轴
+			svg.append('g').attr('transform', 'translate(100, 120)').call(axis[0])
+			svg.append('g').attr('transform', 'translate(240, 120)').call(axis[1])
+			svg.append('g').attr('transform', 'translate(120, 100)').call(axis[2])
+			svg.append('g').attr('transform', 'translate(120, 240)').call(axis[3])
+		</script>
+	</body>
+</html>

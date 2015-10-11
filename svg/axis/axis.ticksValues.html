@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - axis.tickValues([values])</title>
+		<style type="text/css">
+			.domain,
+			.tick path,
+			.tick line {
+			  fill: none;
+			  stroke: #000;
+			  stroke-width: 2;
+			  shape-rendering: crispEdges;
+			}
+			body{
+			  font-weight:bold;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var width=1200,height=500;
+			
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": width,
+					"height": height,
+				});
+				
+			//刻度值数组
+			var values=["A","B","C","D","E","F"];
+			
+			//构造序数比例尺
+			var ordinalScale = d3.scale
+				.ordinal()
+				.domain(values)
+				.rangePoints([0, width/2]);
+			
+			//轴
+			var xAxis=d3.svg.axis()
+				.scale(ordinalScale)
+				.orient("bottom")
+				.tickValues(values);	//设置刻度为特定的值
+			
+			//绘制轴
+			svg.append('g')
+				.attr('transform', 'translate(50, 220)')
+				.call(xAxis);
+		</script>
+	</body>
+</html>

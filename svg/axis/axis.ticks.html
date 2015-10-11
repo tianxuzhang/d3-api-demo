@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>svg - axis.ticks([arguments…])</title>
+		<style type="text/css">
+			.domain,
+			.tick path,
+			.tick line {
+			  fill: none;
+			  stroke: #000;
+			  stroke-width: 2;
+			  shape-rendering: crispEdges;
+			}
+			body{
+			  font-weight:bold;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var width=1200,height=500;
+			
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": width,
+					"height": height,
+				});
+			
+			//构造比例尺
+			var timeScale = d3.time.scale().domain([new Date(2010, 1, 1), new Date(2020, 1, 1)]).range([0, width-100]);
+			var logScale = d3.scale.log().domain([1, 1000000]).range([0, width-100]);
+			var linearScale = d3.scale.linear().domain([0, 10]).range([0, width-100]);
+			
+			//轴
+			var timeAxis=d3.svg.axis().scale(timeScale).orient("bottom");
+			var logAxis=d3.svg.axis().scale(logScale).orient("bottom");
+			var linearAxis=d3.svg.axis().scale(linearScale).orient("bottom");
+			
+			//设置轴的刻度
+			timeAxis.ticks(d3.time.years,2);
+			logAxis.ticks(20, "e");
+			linearAxis.ticks(20);
+			
+			//绘制轴
+			svg.append('g').attr('transform', 'translate(50, 100)').call(timeAxis);
+			svg.append('g').attr('transform', 'translate(50, 160)').call(logAxis);
+			svg.append('g').attr('transform', 'translate(50, 220)').call(linearAxis);
+		</script>
+	</body>
+</html>
