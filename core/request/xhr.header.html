@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - xhr.header(name[, value])</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//请求头
+			d3.xhr("xhrText.txt")
+				.header("Content-Type", "application/x-www-form-urlencoded")
+				.post("a=2&b=3", function(error, data) {
+						//回调函数
+				});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - d3.tsv(url[, accessor][, callback])</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+		<style>
+
+body {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.point {
+  fill: steelblue;
+  stroke: #000;
+}
+
+</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			d3.tsv("xhrTsv.tsv", function(error, data) {
+			 	if (error){
+					console.log(error);
+				}else{
+					console.log(data);
+				}
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - d3.text(url[, mimeType][, callback])</title>
+		<style type="text/css">
+			svg text{
+				fill: orange;
+				font-size: 56px;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//文本请求
+			d3.text("xhrText.txt", function (error, text) {
+				if(error){
+					console.log(error);
+					d3.select('body').append('p')
+						.text(error.statusText+" "+error.responseURL);
+				}else{
+					console.log(text);
+					d3.select('body').append('p')
+						.text(text);
+				}
+			});
+		</script>
+	</body>
+</html>

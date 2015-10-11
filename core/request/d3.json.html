@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - d3.json(url[, callback])</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//json文件请求
+			d3.json("attrJson.json", function (error, json) {
+				if(error){
+					console.log(error);
+				}else{
+					d3.select('body')
+						.append('svg')
+						.append('circle')
+						.attr(json)
+				}
+			});
+		</script>
+	</body>
+</html>

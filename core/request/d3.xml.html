@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - d3.xml(url[, mimeType][, callback])</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			d3.xml("circle.svg", "image/svg+xml", function(error, xml) {  
+				if(error){                                     
+					console.log(error);                        
+				}else{
+					document.body.appendChild(xml.documentElement);//添加DOM节点  
+				}
+			}); 
+		</script>
+	</body>
+</html>

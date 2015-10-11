@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - d3.html(url[, mimeType][, callback])</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">var data;
+			d3.html("div.html", function(error, html) {
+				if(error){                                     
+					console.log(error);                        
+				}else{
+					document.body.appendChild(html.firstChild);//添加DOM节点  
+				}
+			}); 
+		</script>
+	</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - xhr.mimeType([type])</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//设置mime类型
+			d3.xhr("xhrText.txt")
+				.mimeType("text/plain")
+				.get(function (error, request) {
+					console.log(error);
+					console.log(request);
+				});
+		</script>
+	</body>
+</html>

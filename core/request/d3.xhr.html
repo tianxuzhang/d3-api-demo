@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - d3.xhr(url[, mimeType][, callback])</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//d3.xhr异步请求
+			d3.xhr("xhrText.txt", "text/plain",function (error, success) {
+				if(error){
+					console.log(error);
+					console.log(success);
+					d3.select('body').append('p')
+						.text(error.statusText+" "+error.responseURL);
+				}else{
+					console.log(error);
+					console.log(success);
+					d3.select('body').append('p')
+						.text(success.responseText);
+				}
+			});
+		</script>
+	</body>
+</html>

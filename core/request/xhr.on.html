@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - xhr.send(method[, data][, callback])</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var xhr = d3.xhr("xhrText.txt")
+			    .on("progress", function() { console.log("progress", d3.event.loaded); })
+			    .on("load", function(json) { console.log("success!", json); })
+			    .on("error", function(error) { console.log("failure!", error); })
+			    .get();
+		</script>
+	</body>
+</html>

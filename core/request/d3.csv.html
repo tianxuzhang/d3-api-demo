@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - d3.csv(url[, accessor][, callback])</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//csv文件请求
+			d3.csv("xhrCsv.csv", function (error, csv) {
+				if(error){
+					console.log(error);
+				}else{
+					csv.forEach(function(row) {  
+						console.log(row.who+'家有'+row.cat+'只猫，'+row.dog+'条狗'); 
+					});  
+				}
+			});
+		</script>
+	</body>
+</html>

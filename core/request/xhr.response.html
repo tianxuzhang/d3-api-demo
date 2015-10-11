@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - xhr.response(value)</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//response
+			d3.xhr("xhrJson.json")
+				.response(function (request) {
+					return JSON.parse(request.responseText);	//取出映射响应的XMLHttpRequest对象的响应值，并解析为JS对象
+				})
+				.get(function (error, request) {
+					if(error){
+						console.log(error);
+					}else{
+						console.log(request);
+					}
+				});
+		</script>
+	</body>
+</html>
