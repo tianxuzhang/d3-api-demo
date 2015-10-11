@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="../../d3.js"></script>
+<script>
+var width = 960,
+    height = 960;
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+    
+var color=d3.scale.category20c();
+var projection = d3.geo.mercator()
+						.center([120, 35])
+						.scale(540);
+var path = d3.geo.path()
+				.projection(projection);
+
+d3.json("china.json", function(error, china) {
+	svg.selectAll("path")
+		.data( china.features )
+		.enter()
+		.append("path")
+		.attr("d",path)
+		.attr("fill","midnightblue");
+	  
+    svg.selectAll("circle")
+      .data(china.features)
+      .enter()
+      .append("circle")
+      .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+      .attr("r", 3 )
+	  .attr("fill",function(d,i){ return color(i)});
+	
+});
+
+</script>
