@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="../../d3.js"></script>
+<script src="topojson.v1.min.js"></script>
+<script>
+var width = 960,    height = 960;
+    
+var radius = 240;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+    
+var projection = d3.geo.albers();
+
+var path = d3.geo.path()
+    .projection(projection);
+
+d3.json("us.json", function(error, us) {
+  svg.insert("path", ".graticule")
+      .datum(topojson.feature(us, us.objects.land))
+      .attr("class", "land")
+      .attr("d", path)
+      .attr("fill","steelblue");
+});
+</script>
+

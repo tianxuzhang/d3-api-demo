@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="../../d3.js"></script>
+<script src="topojson.v1.min.js"></script>
+<script>
+var width = 960,
+    height = 960;
+    
+var radius = 240;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+    
+var projection = d3.geo.orthographic()
+    .scale(radius)
+    .clipAngle(90);
+  
+   projection.precision(1);
+   //projection.rotate([0,30,0]);
+   //projection.rotate([30, 0,0]);
+   //projection.rotate([0, 0,30]);
+   
+var path = d3.geo.path()
+    .projection(projection);
+
+d3.json("world-50m.json", function(error, world) {
+  	var feature = svg.append("path")
+      .datum(topojson.feature(world, world.objects.land))
+      .attr("d", path)
+      .attr("fill","steelblue");
+
+});
+</script>
+

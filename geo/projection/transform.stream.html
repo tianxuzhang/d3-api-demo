@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="../../d3.js"></script>
+<script src="topojson.v1.min.js"></script>
+<script>
+
+var width = 960,
+    height = 500;
+
+var transform1 = d3.geo.transform({
+    point:function(x,y){console.log("transform1");this.stream.point(x+300,y)}
+}) 
+var transform2 = d3.geo.transform({
+    point:function(x,y){console.log("transform2");this.stream.point(x,y+300)}
+}) 
+var projection = {
+        stream: function(s) { 
+            return transform2.stream(transform1.stream(s)); 
+        }
+     };
+var path = d3.geo.path()
+	.projection(projection);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("path")
+    .datum({type: "Polygon", coordinates: [
+      [[100, 50], [50, 200], [200, 200], [200, 50], [50, 50]]
+    ]})
+    .attr("d", path)
+    .attr('fill','tomato');
+
+</script>
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="../../d3.js"></script>
+<script src="topojson.v1.min.js"></script>
+<script>
+var width = 960,
+    height = 960;
+    
+var radius = 240;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+    
+var projection = d3.geo.orthographic()
+					.translate([250,250])
+					.clipAngle(90);
+
+var path = d3.geo.path()
+			.projection(projection);
+
+var div = d3.select("body").append("div");
+
+d3.json("world-50m.json", function(error, world) {
+	var feature = svg.append("path")
+						.datum(topojson.feature(world, world.objects.land))
+						.attr("d", path)
+						.attr("fill","steelblue");
+
+	var t = 0;
+	d3.timer(function() {
+		var s = Math.round(Date.now() / 100);
+		if (s != t) {
+			t = s;
+			var x = s%250;
+			projection.scale([ 50 ]);
+			div.html("比例系数：[" + x + "]");
+			feature.attr("d", path);
+		}
+	});
+
+});
+
+</script>
+
