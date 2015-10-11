@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - d3.format(specifier)</title>
+		<style type="text/css">
+			svg text{
+				fill: orange;
+				font-size: 56px;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			//
+			svg.append("g").attr('transform', 'translate(350, 250)')
+				.append('text')
+				.attr({
+					x: 0,
+					y: 0
+				});
+
+			var num = 99.999;
+
+			var arr = ["integer", "exponent", "fixed", "percentage"]
+			for (var i = 0; i < arr.length; i++) {
+				var format = d3.format(arr[i]);
+				svg.select('text')
+					.data(arr)
+					.transition().duration(400)
+					.delay(i*500)
+					.attr('transform', 'rotate(' + i*45 + ')')
+					.text(d+format(num));
+			}
+		</script>
+	</body>
+</html>
