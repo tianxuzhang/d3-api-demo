@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="../../d3.js"></script>
+<script>
+
+var width = 960,
+    height = 500,
+    radius = Math.min(width, height) / 2,
+    color = d3.scale.category10();
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+  .append("g")
+    .attr("transform", "translate(" + width / 2 + "," + height /2 + ")");
+
+var partition = d3.layout.partition()
+    .sort(null)
+    //.size([2 * Math.PI, radius * radius])
+   .size([Math.PI, radius * radius])
+     //.size([ Math.PI/2, radius * radius])
+    .value(function(d) { return 1; });
+
+var arc = d3.svg.arc()
+    .startAngle(function(d) { return d.x; })
+    .endAngle(function(d) { return d.x + d.dx; })
+    .innerRadius(function(d) { return Math.sqrt(d.y); })
+    .outerRadius(function(d) { return Math.sqrt(d.y + d.dy); });
+
+d3.json("partition.json", function(error, root) {
+  var path = svg.datum(root).selectAll("path")
+      .data(partition.nodes)
+    .enter().append("path")
+      .attr("d", arc)
+      .style("stroke", "#fff")
+      .style("fill", function(d) { return color((d.children ? d : d.parent).name); });
+});
+
+</script>
