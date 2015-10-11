@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>time - interval.range(start, stop[, step])</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			var now = new Date();
+/************************************d3.time.interval************************************/
+			//-----获取特定时间符间隔函数：second
+			var second = d3.time.second;
+			//-----获取特定时间符间隔函数：minute
+			var minute = d3.time.minute;
+			//-----获取特定时间符间隔函数：hour
+			var hour = d3.time.hour;
+
+			//以minute为时间单位取所有时间点，未指定step
+			var val_4 = minute.range(new Date(now - 10*60*1000), now);
+			//以minute为时间单位取所有时间点，指定step为2，即每两个时间点之间有2个时间单位
+			var val_4_ = minute.range(new Date(now - 10*60*1000), now, 2);
+
+
+			//----print all results
+			console.log("以minute为时间单位取所有时间点 - 未指定step：" + val_4);
+			console.log("以minute为时间单位取所有时间点 - 指定step=2：" + val_4_);
+		</script>
+	</body>
+</html>

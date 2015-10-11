@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>time - interval.offset(date, step)</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			var now = new Date();
+/************************************d3.time.interval************************************/
+			//-----获取特定时间符间隔函数：second
+			var second = d3.time.second;
+			//-----获取特定时间符间隔函数：minute
+			var minute = d3.time.minute;
+			//-----获取特定时间符间隔函数：hour
+			var hour = d3.time.hour;
+
+			//以minute为时间单位，取10minute后的时间点
+			var val_5 = minute.offset(now, 10);
+			//以minute为时间单位，取10minute前的时间点
+			var val_5_ = minute.offset(now, -10);
+
+
+
+			//----print all results
+			console.log("以minute为时间单位，取10minute后的时间点：" + val_5);
+			console.log("以minute为时间单位，取10minute前的时间点：" + val_5_);
+		</script>
+	</body>
+</html>

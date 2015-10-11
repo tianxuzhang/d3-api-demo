@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>time - interval.round(date)</title>
+		<style type="text/css">
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			var now = new Date();
+/************************************d3.time.interval************************************/
+			//-----获取特定时间符间隔函数：second
+			var second = d3.time.second;
+			//-----获取特定时间符间隔函数：minute
+			var minute = d3.time.minute;
+			//-----获取特定时间符间隔函数：hour
+			var hour = d3.time.hour;
+
+			//未超过中间值，这里以minute为例
+			var beforeMin = minute(now).getTime() + 29 * 1000;
+			//已超过中间值，这里以minute为例
+			var afterMin = minute(now).getTime() + 31 * 1000;
+
+			//四舍五入
+			var val_2 = minute.round(new Date(beforeMin));
+			var val_2_ = minute.round(new Date(afterMin));
+
+			//----print all results
+			console.log("四舍五入 - 未超中间值：" + val_2);
+			console.log("四舍五入 - 已超中间值：" + val_2_);
+		</script>
+	</body>
+</html>

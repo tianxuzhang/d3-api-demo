@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>time - d3.time.interval</title>
+		<style type="text/css">
+			.domain{
+				stroke: #7CC4FF;
+				stroke-width: 1;
+				fill: none;
+			}
+			.tick line{
+				stroke: #7CC4FF;
+				stroke-width: 1;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			var now = new Date();
+/************************************d3.time.interval************************************/
+			//-----获取特定时间符间隔函数：second
+			var second = d3.time.second;
+			//-----获取特定时间符间隔函数：minute
+			var minute = d3.time.minute;
+			//-----获取特定时间符间隔函数：hour
+			var hour = d3.time.hour;
+
+			//以秒为单位，获取当前时间的秒间隔表示形式
+			var secNow = second(now);
+			//以分为单位，获取当前时间的分间隔表示形式
+			var minNow = minute(now);
+			//以小时为单位，获取当前时间的小时间隔表示形式
+			var hourNow = hour(now);
+
+			//未超过中间值，这里以minute为例
+			var beforeMin = minute(now).getTime() + 29 * 1000;
+			//已超过中间值，这里以minute为例
+			var afterMin = minute(now).getTime() + 31 * 1000;
+			//向下舍入
+			var val_1 = minute.floor(new Date(beforeMin));
+			var val_1_ = minute.floor(new Date(afterMin));
+			//四舍五入
+			var val_2 = minute.round(new Date(beforeMin));
+			var val_2_ = minute.round(new Date(afterMin));
+			//向上舍入
+			var val_3 = minute.ceil(new Date(beforeMin));
+			var val_3_ = minute.ceil(new Date(afterMin));
+
+			//以minute为时间单位取所有时间点，未指定step
+			var val_4 = minute.range(new Date(now - 10*60*1000), now);
+			//以minute为时间单位取所有时间点，指定step为2，即每两个时间点之间有2个时间单位
+			var val_4_ = minute.range(new Date(now - 10*60*1000), now, 2);
+
+			//以minute为时间单位，取10minute后的时间点
+			var val_5 = minute.offset(now, 10);
+			//以minute为时间单位，取10minute前的时间点
+			var val_5_ = minute.offset(now, -10);
+
+			//以UTC时间，四舍五入minute时间点
+			var val_6 = minute.utc.round(now);
+
+/************************************d3.time.intervals************************************/
+
+
+/************************************d3.time.aliases************************************/
+			var dayOfYear = d3.time.dayOfYear(now);
+			var weekOfYear = d3.time.weekOfYear(now);
+			var sundayOfYear = d3.time.sundayOfYear(now);
+			var mondayOfYear = d3.time.mondayOfYear(now);
+			var tuesdayOfYear = d3.time.tuesdayOfYear(now);
+			var wednesdayOfYear = d3.time.wednesdayOfYear(now);
+			var thursdayOfYear = d3.time.thursdayOfYear(now);
+			var fridayOfYear = d3.time.fridayOfYear(now);
+			var saturdayOfYear = d3.time.saturdayOfYear(now);
+
+
+			//----print all results
+			console.log("[d3.time.second]秒的间隔器实现为：" + second);
+			console.log("[d3.time.minute]秒的间隔器实现为：" + minute);
+			console.log("[d3.time.hour]秒的间隔器实现为：" + hour);
+			console.log("");
+			console.log("取当前时间，以[秒]为单位的表示形式：" + secNow);
+			console.log("取当前时间，以[分]为单位的表示形式：" + minNow);
+			console.log("取当前时间，以[小时]为单位的表示形式：" + hourNow);
+			console.log("");
+			console.log("向下舍入 - 未超中间值：" + val_1);
+			console.log("向下舍入 - 已超中间值：" + val_1_);
+			console.log("四舍五入 - 未超中间值：" + val_2);
+			console.log("四舍五入 - 已超中间值：" + val_2_);
+			console.log("向上舍入 - 未超中间值：" + val_3);
+			console.log("向上舍入 - 已超中间值：" + val_3_);
+			console.log("");
+			console.log("以minute为时间单位取所有时间点 - 未指定step：" + val_4);
+			console.log("以minute为时间单位取所有时间点 - 指定step=2：" + val_4_);
+			console.log("");
+			console.log("以minute为时间单位，取10minute后的时间点：" + val_5);
+			console.log("以minute为时间单位，取10minute前的时间点：" + val_5_);
+			console.log("");
+			console.log("以UTC时间，四舍五入minute时间点：" + val_6);
+			console.log("");
+			console.log("/************************************d3.time.aliases************************************/");
+			console.log("");
+			console.log("今天是一年中的第 [" + (dayOfYear + 1) + "] 天");
+			console.log("今天是一年中的第 [" + (weekOfYear + 1) + "] 周");
+			console.log("今天是一年中的第 [" + sundayOfYear + "] 个周日");
+			console.log("今天是一年中的第 [" + mondayOfYear + "] 个周一");
+			console.log("今天是一年中的第 [" + tuesdayOfYear + "] 个周二");
+			console.log("今天是一年中的第 [" + wednesdayOfYear + "] 个周三");
+			console.log("今天是一年中的第 [" + thursdayOfYear + "] 个周四");
+			console.log("今天是一年中的第 [" + fridayOfYear + "] 个周五");
+			console.log("今天是一年中的第 [" + saturdayOfYear + "] 个周六");
+		</script>
+	</body>
+</html>
