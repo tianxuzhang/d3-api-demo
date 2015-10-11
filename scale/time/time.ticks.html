@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+</style>
+<body>
+<script src="../../d3.js"></script>
+<script>
+//svg宽，高
+var width = 1000,height = 500;
+//时间比例尺
+var timeScale = d3.time.scale()
+    .domain([new Date(2015, 0, 1), new Date(2016, 0, 1)])
+    .range([0, width-40]);
+	timeScale.ticks(d3.time.day, 15); 
+//添加时间轴    
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+  .append("g")
+    .attr("class", "axis")
+    .attr("transform", "translate(" + 20 + "," + height/2 + ")")
+    .call(d3.svg.axis().scale(timeScale).orient("bottom"));
+
+</script>
