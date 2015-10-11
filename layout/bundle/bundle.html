@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style type="text/css">
+	body{
+		font-weight:bold;
+	}
+</style>
+<body>
+<script src="../../d3.js"></script>
+<script>
+
+//节点数据
+var rawnodes={
+	parent:"test",key:"data",
+	children: 
+	[
+		{
+			parent:"data",key:"AAA",
+				children:
+				[
+					{	parent:"AAA",key:"aaa01"	},
+					{	parent:"AAA",key:"aaa02"	}
+				]
+		},{
+			parent:"data",key:"BBB",
+				children:
+				[
+					{	parent:"BBB",key:"bbb01"	},
+					{	parent:"BBB",key:"bbb02"	}
+				]
+		},{
+			parent:"data",key:"CCC",
+				children:
+				[
+					{	parent:"CCC",key:"ccc01"	},
+					{	parent:"CCC",key:"ccc02"	}
+				]
+		},{
+			parent:"data",key:"DDD",
+				children:
+				[
+					{	parent:"DDD",key:"ddd01"	},
+					{	parent:"DDD",key:"ddd02"	}
+				]
+		}
+	]
+};
+
+//连接数据
+var rawlinks=[
+	{source: "aaa01", target:"aaa02"},
+	{source: "bbb01", target:"bbb02"},
+	{source: "ccc01", target:"ccc02"},
+	{source: "ddd01", target:"ddd02"},
+	{source: "aaa01", target:"bbb02"},
+	{source: "DDD", target:"CCC"}
+];
+
+var svgsize = 960,
+    radius = svgsize / 2,
+    innerRadius = radius - 120;
+
+//簇布局
+var cluster = d3.layout.cluster()
+    .size([360, innerRadius])
+    .value(function(d) { return d.size; });
+
+//捆绑布局
+var bundle = d3.layout.bundle();
+
+//径向线生成器
+var line = d3.svg.line.radial()
+    .interpolate("bundle")
+    .tension(1)
+    .radius(function(d) { return d.y; })
+    .angle(function(d) { return d.x / 180 * Math.PI; });
+
+//svg容器
+var svg = d3.select("body").append("svg")
+    .attr("width", svgsize)
+    .attr("height", svgsize)
+  .append("g")
+    .attr("transform", "translate(" + radius + "," + radius + ")");
+  //生成捆绑布局需要的数据
+  var nodes = cluster.nodes(rawnodes),
+      links = mkLinks(nodes,rawlinks);
+  //使用生成的数据绘制捆绑图
+  //链接
+  svg.selectAll(".link")
+      .data(bundle(links))	//使用捆绑布局生成径向路径生成器需要的数据
+    .enter().append("path")
+      .attr( { "stroke": "steelblue","fill": "none" ,"stroke-width":4} )
+      .attr("d", line);
+  //节点
+  svg.selectAll(".node")
+      .data(nodes)
+    .enter().append("g")
+       .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+    .append("text")
+	  .attr("dx", function(d) { return d.x < 180 ? 8 : -8; })
+      .attr("text-anchor", function(d) { if(d.x==180) return "middle"; else return d.x < 180 ? "start" : "end"; })
+      .attr("transform", function(d) { if(d.x==180) return "rotate(-90)"; else return d.x < 180 ? null : "rotate(180)"; })
+	  .attr("font-size",30)
+      .text(function(d) { return d.key; });
+
+//转换为捆绑布局需要的链接数据
+function mkLinks(nodes,links) {
+  var map = {},newlinks = [];
+ 
+  nodes.forEach(function(d) {
+    map[d.key] = d;
+  });
+
+  links.forEach(function(d) {
+      newlinks.push({source: map[d.source], target: map[d.target]});
+  });
+
+  return newlinks;
+}
+
+</script>
