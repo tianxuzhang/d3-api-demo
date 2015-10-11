@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="../../d3.js"></script>
+<script>
+	var width = 960, height = 500;
+	var color = d3.scale.category10();
+	var radius =16;
+
+	var data = d3.range(20).map(function() {
+		return [ Math.random() * width/2, Math.random() * height/2 ];
+	});
+	
+	var svg = d3.select("body").append("svg")
+	    .attr("width", width)
+	    .attr("height", height);
+ 
+	var drag = d3.behavior.drag()
+	 	.origin(function(d) {return {x : d[0],y : d[1]};})
+		.on("dragstart", function(){d3.select(this).attr("r",radius*2);})
+		.on("drag", drag)
+		.on("dragend",function(){d3.select(this).attr("r",radius);});
+
+	var nodes=svg.selectAll("circle")
+		.data(data)
+		.enter()
+		.append("circle")
+		.attr("transform", function(d) {return "translate(" + 100 + "," + 100 + ")";})
+		.attr("cx",function(d) { return d[0];})
+		.attr("cy",function(d) { return d[1];})
+		.attr("r",radius)
+		.attr("fill", function(d, i) { return color(i);})
+		.call(drag);
+
+	function drag(d) {
+		d[0] = d3.event.x;
+		d[1] = d3.event.y;
+		d3.select(this).attr("cx", d[0]).attr("cy", d[1]);
+	}
+
+</script>
