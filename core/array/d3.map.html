@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>D3.core - d3.map</title>
+		<style type="text/css">
+			svg circle{
+				fill: orange;
+			}
+		</style>
+		<!--import js file-->
+		<script type="text/javascript" src="../../d3.js"></script>
+		<script type="text/javascript" src="../d3.core.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//以下代码的讲解，请参见d3.selections.html
+			var svg = d3.select('body')
+				.append('svg')	//向body标签增加svg子元素
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+			
+			//下面是正文
+
+			//构造map
+			var map = d3.map({
+				name1: "A1", name2: "A2", name3: "A3", name4: "A4"
+			});
+
+			//map.has()
+			console.log('map.has("value"): ' + map.has("value"));
+			console.log('map.has("name1"): ' + map.has("name1"));
+
+			//map.get()
+			console.log('map.get("name1"): ' + map.get("name1"));
+
+			//map.set()
+			map.set("name5", "A5");
+			console.log('map.set("name5", "A5"): ');
+			console.log(map)
+
+			//map.remove()
+			map.remove("name2");
+			console.log('map.remove("name2"): ');
+			console.log(map);
+
+			//map.keys()
+			console.log('map.keys(): ');
+			console.log(map.keys());
+
+			//map.values()
+			console.log('map.values(): ');
+			console.log(map.values());
+
+			//map.entries()
+			console.log('map.entries(): ');
+			console.log(map.entries());
+
+			//map.forEach()
+			map.forEach(function (key, value) {
+				console.log(key + " ---> " + value);
+			});
+
+			//map.empty()，map.size()
+			console.log('map.empty(): ' + map.empty());
+
+			//map.size()
+			console.log('map.size(): ' + map.size());
+			
+		</script>
+	</body>
+</html>
