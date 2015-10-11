@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>D3.core - d3.hsl</title>
+		<style type="text/css">
+			svg text{
+				font-size: 28px;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+			
+			//hsl函数
+			var hsl = d3.hsl(100, 0.5, 0.5);
+			svg.append("g").attr('transform', 'translate(350, 50)')
+				.append('text')
+				.attr({
+					x: 0,
+					y: 0
+				})
+				.style("fill", hsl)
+				.text("d3.hsl");
+
+			var hsl = d3.hsl("green");
+			svg.append("g").attr('transform', 'translate(350, 100)')
+				.append('text')
+				.attr({
+					x: 0,
+					y: 0
+				})
+				.style("fill", hsl)
+				.text("d3.hsl");
+
+			svg.append("g").attr('transform', 'translate(350, 150)')
+				.append('text')
+				.attr({
+					x: 0,
+					y: 0
+				})
+				.style("fill", hsl)
+				.text("RGB: " + hsl.rgb());
+
+		</script>
+	</body>
+</html>
