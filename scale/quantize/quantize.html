@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+}
+
+</style>
+<body>
+<script src="../../d3.js"></script>
+<script>
+//svg尺寸
+var width = 500,height = 500;
+
+//数据集
+var dataset=[1,2,3,4,5,6,7,8,9];
+
+var color = d3.scale.category10();
+
+//默认量化比例尺
+var quantizeScale = d3.scale.quantize() 
+	.domain([d3.min(dataset), d3.max(dataset)])
+	.range(["a","b","c"]); 
+
+//创建svg标签
+var svg = d3.select("body").append("svg")
+    .attr("width", width+30)
+    .attr("height", height)
+    .append("g")
+    .attr("transform", "translate(" + 20 + "," + 0 + ")");
+
+//创建文本标签
+var texts=svg.selectAll("text")
+	.data(dataset)
+	.enter()
+	.append("text")
+	.text( function(d){ return quantizeScale(d); })
+	.attr({
+		x:function(d,i){ return i*width/(dataset.length-1); },
+		y:width/3,
+		'text-anchor':'middle',
+		fill:function(d){ return color(quantizeScale(d)); },
+		'font-weight':'bold',
+		'font-size':30
+	});
+
+//轴比例尺
+var axisScale=d3.scale.linear()
+		.domain([d3.min(dataset), d3.max(dataset)])
+		.range([0, width]);
+		
+//创建坐标轴
+svg.append("g")
+ .attr("transform", "translate(" + 0 + "," + (width/3+20) + ")")
+    .attr("class", "x axis")
+    .call(d3.svg.axis().scale(axisScale).orient("bottom"));
+
+</script>
