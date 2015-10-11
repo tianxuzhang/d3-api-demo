@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style type="text/css">
+
+input#horizontal {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  width: 240px;
+}
+input#vertical {
+  position: absolute;
+  left: 258px;
+  top: 8px;
+  width: 240px;
+}
+</style>
+<body>
+<input id="horizontal" type="range" min="0" max="180" step="2">
+<input id="vertical" type="range" min="0" max="180" step="2">
+<script src="d3.v3.min.js"></script>
+<script src="topojson.v1.min.js"></script>
+
+<script>
+var width = 960,
+height = 960;
+var svg = d3.select("body").append("svg")
+.attr("width", width)
+.attr("height", height);
+
+
+var projection = d3.geo.orthographic().translate([250,250]);
+var path = d3.geo.path().projection(projection);
+
+d3.select("input#horizontal").on("change", function() {
+	  var value = this.value;
+	  var circle = d3.geo.circle().origin([value,0]);
+
+	  svg.append("path")
+	  .datum(circle)
+	  .attr("stroke","#ed6d3d")
+	  .attr("fill","none")
+	  .attr("stroke-width","2")
+	  .attr("d", path);
+
+});
+d3.select("input#vertical").on("change", function() {
+	  var value = this.value;
+	  console.log(value);
+	  var circle = d3.geo.circle().origin([0,value]);
+
+	  svg.append("path")
+	  .datum(circle)
+	  .attr("stroke","#ed6d3d")
+	  .attr("fill","none")
+	  .attr("stroke-width","2")
+	  .attr("d", path);
+
+});
+</script>
