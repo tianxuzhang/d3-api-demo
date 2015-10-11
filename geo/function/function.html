@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.arc {
+  fill: none;
+  stroke: red;
+  stroke-width: 3px;
+  stroke-linecap: round;
+}
+
+</style>
+<body>
+<script src="../../d3.js"></script>
+<script>
+
+var width = 960,
+    height = 480;
+var color = d3.scale.category20b();
+var projection = d3.geo.mercator().center([120, 35]).scale(540);
+var path = d3.geo.path()
+	.projection(projection);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+d3.geo.distance([104, 25], [119, 32]);
+
+d3.json("china.json", function(error, china) {
+	svg.selectAll("path")
+		.data( china.features )
+		.enter()
+		.append("path")
+		.attr("d",path)
+		.attr("fill",function(d){ return color(d)});
+	svg.append("path")
+    .datum({type: "LineString", coordinates: [[104, 25], [119, 32]]})
+    .attr("class", "arc")
+    .attr("d", path);
+});
+//d3.geo.distance([104, 25], [119, 32]);
+//d3.geo.length({type: "LineString", coordinates: [[104, 25], [119, 32]]});
+//d3.geo.interpolate([104, 25], [119, 32]);
+</script>
