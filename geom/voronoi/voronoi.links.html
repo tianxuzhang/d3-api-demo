@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voronoi Diagram with Force Directed Nodes and Delaunay Links</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script src="../../d3.js"></script>
+    <style type="text/css">
+        circle {
+            stroke: #EFEDF5;
+            fill: #EFEDF5;
+            pointer-events: none;
+        }
+        line {
+            pointer-events: none;
+            stroke: yellow;
+            stroke-width: 2px;
+            opacity: .9;
+            dashed:#cccccc;
+        }
+        path{
+            stroke: #EFEDF5;
+            stroke-width: 2px;
+        }
+    </style>
+</head>
+<body>
+<div id="chart">
+</div>
+<script type="text/javascript">
+    var w = h=500;
+        color = d3.scale.category10();
+        
+    var data = [ [ 100, 100 ], [ 140, 200 ], [ 140, 180 ], [ 130, 170 ],[ 230, 60 ],[ 90, 220 ], [ 200, 200 ]];
+
+    var voronoi = d3.geom.voronoi();
+
+    var svg = d3.select("body")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h)
+
+    svg.selectAll("path")
+    		.data(voronoi(data))
+        	.enter().append("path")
+        	.attr("d", function(d) { 
+        		return "M" + d.join("L") + "Z"; 
+        	})
+            .style("fill", function(d, i) { 
+            	return color(i) 
+            })
+
+    svg.selectAll("circle")
+        .data(data)
+        .enter().append("circle")
+        .attr("r", 5)
+        .attr("cx", function(d) { return d[0]; })
+        .attr("cy", function(d) { return d[1]; });
+
+    svg.selectAll("line")
+    	.data(voronoi.links(data))
+        .enter().append("line")
+       	.attr("x1", function(d) { return d.source[0]; })
+        .attr("y1", function(d) { return d.source[1]; })
+        .attr("x2", function(d) { return d.target[0]; })
+        .attr("y2", function(d) { return d.target[1]; })
+
+</script>
+</body>
+</html>

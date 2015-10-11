@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+path {
+  stroke: #fff;
+}
+
+circle {
+  fill: white;
+}
+</style>
+<body>
+<script src="../../d3.js"></script>
+<script>
+
+var width = 500, height = 500;
+
+var color=d3.scale.category10();
+var data = [ [ 100, 100 ], [ 140, 200 ], [ 140, 180 ], [ 130, 170 ],[ 230, 60 ],[ 90, 220 ], [ 200, 200 ]];
+
+var voronoi = d3.geom.voronoi();
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var path = svg.append("g")
+	.selectAll("path")
+	.data(voronoi(data))
+	.enter().append("path")
+	.attr("fill", function(d, i) {
+		return color(i); 
+	})
+	.attr("d", function(d,i){
+		return "M" + d.join("L") + "Z";
+	});
+ 
+svg.selectAll("circle")
+	.data(data)
+	.enter()
+	.append("circle")
+	.attr("transform", function(d) {
+		return "translate(" + d + ")";
+	})
+	.attr("r", 2);
+
+</script>
