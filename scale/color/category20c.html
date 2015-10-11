@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+body{
+  font-weight:bold;
+}
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+</style>
+<body>
+<script src="../../d3.js"></script>
+<script>
+var color=d3.scale.category20c();
+
+var margin = {top: 20, right: 20, bottom: 20, left: 20},
+    width = 500 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+ 
+var dataset=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+
+var yScale=d3.scale.ordinal() 
+             .domain(d3.range(dataset.length))    
+             .rangeRoundBands([0,height]); 
+               
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + 0 + "," + margin.top + ")");
+    
+var rects=svg.selectAll("rect")
+	.data(dataset)
+	.enter()
+	.append("rect")
+	.attr({
+		x:function(d,i){ return margin.left*3; },
+		y:function(d,i){ return yScale(d); },
+		width:function(d){ return width; },
+		height:function(d){ return yScale.rangeBand(); },
+		fill:function(d){ return color(d); }
+	});
+	
+var texts=svg.selectAll("text")
+	.data(dataset)
+	.enter()
+	.append("text")
+	.text( function(d){ return color(d); })
+	.attr({
+		x:function(d,i){ return 0; },
+		y:function(d,i){ return margin.top+yScale(i); }
+	});
+
+</script>
