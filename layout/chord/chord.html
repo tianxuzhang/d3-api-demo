@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="../../d3.js"></script>
+<script>
+//矩阵数据
+var matrix = [
+  [ 1, 0, 0, 0],
+  [ 2, 1, 0, 0],
+  [ 3, 2, 1, 0],
+  [ 4, 3, 2, 1]
+];
+//弦布局
+var chord = d3.layout.chord()
+    .matrix(matrix);
+//颜色比例尺   
+var fill = d3.scale.category20();
+    
+var width = 960,
+    height = 500,
+    innerRadius = height * 0.4,
+    outerRadius = innerRadius * 1.1;
+//svg容器
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+  .append("g")
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+//绘制外部的弧
+svg.append("g").selectAll("path")
+    .data(chord.groups)		//用groups访问器读取分组数据绘制弧
+  .enter().append("path")
+    .style("fill", function(d) { return fill(d.index); })
+    .style("stroke", function(d) { return fill(d.index); })
+    .attr("d", d3.svg.arc().innerRadius(innerRadius).outerRadius(outerRadius));
+//绘制内部的弦
+svg.append("g")
+  .selectAll("path")
+    .data(chord.chords)		//用chords访问器读取弦数据绘制弦
+  .enter().append("path")
+    .attr("d", d3.svg.chord().radius(innerRadius))
+    .style("fill", function(d) { return fill(d.target.index); });
+ 
+</script>
