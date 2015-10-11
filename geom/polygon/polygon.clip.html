@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>geom.polygon</title>
+<body>
+<script src="../../d3.js"></script>
+<script>
+
+var width = 960,
+    height = 500;
+
+var data1 = [[ 90, 100 ],[ 120, 50 ],[ 180, 100 ],[ 120, 150 ]];
+var data2 = [[ 60, 100 ],[ 120, 150 ],[ 150, 100 ],[ 120, 50 ]];
+var polygon1=d3.geom.polygon(data1);
+var polygon2=d3.geom.polygon(data2);
+var clip=polygon2.clip(polygon1);
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+/* svg.append("path")
+.datum(polygon1)
+.attr("d", function(d) {
+	return "M" + d.join("L") + "Z";
+})
+.attr("fill","none")
+.attr("stroke","green")
+.attr("stroke-width","2");
+
+svg.append("path")
+.datum(polygon2)
+.attr("d", function(d) {
+	return "M" + d.join("L") + "Z";
+})
+.attr("fill","none")
+.attr("stroke","tomato")
+.attr("stroke-width","2"); */
+
+svg.append("path")
+.datum(clip)
+.attr("d", function(d) {
+	return "M" + d.join("L") + "Z";
+})
+.attr("fill","steelblue"); 
+	
+</script>
