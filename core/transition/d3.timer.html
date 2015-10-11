@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - d3.timer</title>
+		<style type="text/css">
+			svg text{
+				fill: orange;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			var svg = d3.select('body')
+				.append('svg')	//向body标签增加svg子元素
+				.attr({
+					"width": 700,"height": 500
+				});
+			
+			//追加测试元素
+			svg.append('text')
+				.attr({
+					x: 100,y: 100
+				});
+			
+			d3.timer(notify,4 * 1000,Date.now());
+			
+			var i = 0;
+			function notify(d) {
+				svg.select('text').text(i);
+				return i++ >= 1000;
+			}
+		</script>
+	</body>
+</html>

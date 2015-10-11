@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - transition.transition()</title>
+		<style type="text/css">
+			svg circle{
+				fill: orange;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')	
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			//追加测试圆
+			svg.append('circle')
+				.attr({
+					cx: 100,
+					cy: 100,
+					r: 5
+				});
+
+			//新过渡
+			svg.select('circle')
+				.transition().duration(500)	//开启过渡
+				.attr("r", 50)	//设置过渡结束后半径为50
+				.transition().duration(500).delay(1000)	//开启新过渡
+				.attr("r", 5)	//设置过渡结束后半径为5
+		</script>
+	</body>
+</html>

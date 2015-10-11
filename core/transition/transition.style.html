@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - transition.style(name, value[, priority])</title>
+		<style type="text/css">
+			svg circle{
+				fill: orange;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			// 一秒变白
+			d3.select("body")
+				.style("background-color", "black")
+				.transition()
+					.duration(1000)
+				.style("background-color", "white");
+
+		</script>
+	</body>
+</html>

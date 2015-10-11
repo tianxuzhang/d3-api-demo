@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>D3.core - d3.transition</title>
+		<style type="text/css">
+			svg circle{
+				fill: orange;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			//追加测试圆
+			svg.append('circle')
+				.attr({
+					cx: 100,
+					cy: 100,
+					r: 50
+				});
+
+			//在过渡结束后删除元素
+			svg.selectAll('circle')
+				.transition()	//开启动画
+				.duration(1500)	//设置动画持续时间1500毫秒
+				.attr('r', 0)	//设置动画结束时，rect元素顺时针旋转45度
+				.remove();
+		</script>
+	</body>
+</html>

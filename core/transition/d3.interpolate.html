@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - d3.interpolate(a, b)</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//以下代码的讲解，请参见d3.selections.html
+			var svg = d3.select('body')
+				.append('svg')	//向body标签增加svg子元素
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			//追加测试元素
+			svg.append('circle')
+				.attr({
+					cx: 100,
+					cy: 100,
+					r: 20
+				});
+			
+			svg.select('circle')
+				.transition().duration(2000)
+				.styleTween("fill", function (d, i, val) {
+					return d3.interpolate("green", "orange");	//值域为绿色到橘黄色的插值器
+				});
+		</script>
+	</body>
+</html>

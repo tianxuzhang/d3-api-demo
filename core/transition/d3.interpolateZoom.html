@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - d3.interpolateZoom(a, b)</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			var size = 500,
+			radius = 10;
+			
+			var center = [size / 2, size / 2];	//svg中心
+			
+			var view1 = [size/2, size/2, size],
+				view2 = [size-radius, size-radius, 2*radius];
+			
+			//生成svg元素
+			var svg = d3.select("body")
+				.append("svg")
+				.attr("width", size)
+				.attr("height", size)
+				.append("g");
+
+			//追加测试圆元素
+			svg.append("circle")
+				.attr({
+					"fill":"none",
+					"stroke":"tomato",
+					"stroke-width":2,
+					"cx":size-radius,
+					"cy":size-radius,
+					"r":radius-1
+				});
+			
+			var interZoom = d3.interpolateZoom(view1, view2);	//定义放缩插值器
+			svg.transition()
+				.delay(size/2)
+				.duration(interZoom.duration)	//返回的插值器中推荐的过渡持续时间
+				.attrTween("transform", function () {
+					return function (t) {	//t为标准化之后的时间
+						var point=interZoom(t);	//一个三元素数组，描述插入的视图
+						console.log(point);
+						var scale = size / point[2];	//计算缩放倍数
+						return "translate(" + (center[0] - point[0] * scale) + "," + (center[1] - point[1] * scale) + ")scale(" + scale + ")";	//将圆平移到svg中心，并放大相对于svg的缩放倍数
+					};
+				});
+		</script>
+	</body>
+</html>

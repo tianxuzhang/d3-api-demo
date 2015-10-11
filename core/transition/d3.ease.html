@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - d3.ease(type[, arguments…])</title>
+		<style type="text/css">
+			svg circle{
+				fill: tomato;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			//追加测试元素
+			svg.append('circle')
+				.attr({
+					cx: 100,
+					cy: 100,
+					r: 50
+				});
+			
+			svg.selectAll('circle')
+			  .transition()	//开启动画
+				.duration(1500)	//设置动画持续时间1500毫秒
+				.ease(d3.ease("elastic-out"))	//动画的缓动函数为elastic-out
+				.attr('r', 100)	//设置动画结束时，圆的半径为100
+			  .transition()
+				.duration(1500)
+				.ease(d3.ease("poly",3))	//缓动函数换为poly(3)等价于cubic
+				.attr('r', 50);
+		</script>
+	</body>
+</html>
+

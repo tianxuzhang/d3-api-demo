@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - transition.attrTween(name, tween)</title>
+		<style type="text/css">
+			svg circle{
+				fill: orange;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+	<text>10</text>
+		<script type="text/javascript">
+		//使用自定义补间函数过渡文本内容
+		d3.select("text").transition()
+			.duration(7500)
+			.tween("text", function() {
+				var interpolate = d3.interpolate(d3.select(this).text(), 100);	//过渡区间为[10,100]
+				return function(t) { d3.select(this).text(interpolate(t)); };
+			});
+		</script>
+	</body>
+</html>

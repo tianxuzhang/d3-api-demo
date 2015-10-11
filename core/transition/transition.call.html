@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - transition.call(function[, arguments…])</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">			
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')	
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			//生成圆所需的坐标数据
+			dataset=[{"cx":80,"cy":50},{"cx":120,"cy":60},{"cx":160,"cy":90}];
+			
+			//追加测试元素
+			svg.selectAll("ciecle")
+				.data(dataset)
+				.enter()
+				.append('circle')
+				.attr({
+					cx: function(d){return d.cx},
+					cy: function(d){return d.cy},
+					r: 5
+				});
+			
+			//设置动画结束时，rect元素的属性	
+			function setEndAttr(transition){
+				transition.attr({	
+					"opacity":0,"r":50
+				})
+			}
+			
+			//使用call函数调用可重用的属性设置函数
+			svg.selectAll('circle')
+				.transition()
+				.duration(1500)
+				.call(setEndAttr)	//调用setEndAttr函数设置元素属性
+				.each("start", function (d, i) {
+					d3.select(this).attr({
+						"fill": "none",
+						"stroke": "tomato",
+						"stroke-width": 5,
+						"opacity":1
+					})
+				})
+				.each("end", function (d, i) {
+					d3.select(this).remove();
+				});
+				
+		</script>
+	</body>
+</html>

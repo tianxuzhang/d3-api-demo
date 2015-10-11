@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - transition.select(selector)</title>
+		<style type="text/css">
+			svg rect{
+				fill: orange;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			//追加测试元素
+			svg.append('g').attr('transform', 'translate(0, 0)')
+				.append('rect')
+				.attr({
+					x: 50, y: 50, width: 50, height: 50
+				});
+			
+			//
+			svg.selectAll('g')
+				.transition()	//开启动画
+				.duration(500)	//设置动画持续时间500毫秒
+				.attr('transform', "translate(0, 50)")	//设置过渡结束时矩形向下平移50个像素
+				.select('rect')
+					.attr('width', 100);//设置矩形过渡结束后的宽为100
+		</script>
+	</body>
+</html>

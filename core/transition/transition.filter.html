@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - transition.filter(selector)</title>
+		<style type="text/css">
+			svg rect{
+				fill: orange;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			//循环追加8个rect元素
+			for (var i = 0; i < 8; i++) {
+				svg.append('rect')
+					.attr({
+						x: 200 + i * 50,
+						y: 100,
+						width: 40, height: 40
+					});
+			}
+
+			//过滤过渡
+			svg.selectAll('rect')
+				.transition()	//开启动画
+				.duration(1500)	//设置动画持续时间1500毫秒
+				.filter(":nth-child(odd)")	//过滤奇元素
+				.attr('transform', 'rotate(45)');	//设置动画结束时，索引为奇数的矩形元素顺时针旋转45度
+
+		</script>
+	</body>
+</html>

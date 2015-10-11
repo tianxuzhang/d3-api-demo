@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - transition.delay([delay])</title>
+		<style type="text/css">
+			svg rect{
+				fill: orange;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//以下代码的讲解，请参见d3.selections.html
+			var svg = d3.select('body')
+				.append('svg')	//向body标签增加svg子元素
+				.attr({
+					"width": 960,
+					"height": 500,
+				});
+
+			//循环追加rect元素
+			for (var i = 0; i < 20; i++) {
+				svg.append('rect')
+					.attr({
+						x: 20 + i * 15,
+						y: 10,
+						width: 10, height: 10
+					});
+			}
+
+			svg.selectAll('rect')
+				.transition()	//开启动画
+				.attr('transform', 'rotate(45)');	//设置动画结束时，rect元素顺时针旋转45度
+
+		</script>
+	</body>
+</html>

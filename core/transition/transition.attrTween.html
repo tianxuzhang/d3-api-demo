@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - transition.attrTween(name, tween)</title>
+		<style type="text/css">
+			svg circle{
+				fill: orange;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')	
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			//追加测试圆
+			svg.append('circle')
+				.attr({
+					cx: 100,
+					cy: 100,
+					r: 50
+				});
+			
+
+			svg.select('circle')
+				.transition()	//开启动画
+				.duration(1500)	//设置动画持续时间1500毫秒
+				.attrTween("r", tween)	//对半径属性调用自定义的补间函数
+
+			function tween(d, i, a) {//补间函数，设置半径从50过渡到100
+				return d3.interpolateNumber(a,2*a);
+			}
+			
+		</script>
+	</body>
+</html>

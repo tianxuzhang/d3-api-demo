@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - transition.selectAll(selector)</title>
+		<style type="text/css">
+			svg rect{
+				fill: orange;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+
+			//追加3个矩形元素
+			svg.append("g").attr('transform', 'translate(0, 0)');
+			for (var i = 0; i < 3; i++) {
+				svg.select('g').append('rect')
+					.attr({
+						x: i * 50,
+						y: 0,
+						width: 40, height: 40
+					});
+			}
+
+			svg.select('g')
+					.transition()
+					.duration(500)
+					.attr('transform', 'translate(100, 100)')	//设置分组元素平移变换
+				.selectAll('rect')	//为所有选中的子元素设置过渡
+					.delay(function (d, i) {	//设置延迟时间
+						return i * 500;
+					})
+					.attr('transform', 'rotate(45)');	//设置动画结束时，rect元素顺时针旋转45度
+
+		</script>
+	</body>
+</html>

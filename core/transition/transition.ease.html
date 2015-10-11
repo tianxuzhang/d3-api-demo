@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core -  transition.ease([value[, arguments]])</title>
+		<style type="text/css">
+			svg circle{
+				fill: orange;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//向body标签增加svg子元素
+			var svg = d3.select('body')
+				.append('svg')	
+				.attr({
+					"width": 700,
+					"height": 500,
+				});
+			
+			//追加两个测试圆
+			for (var i = 0; i < 2; i++) {
+				svg.append('circle')
+					.attr({
+						cx: 100,
+						cy: 100 + i * 200,
+						r: 50
+					});
+			};
+
+			svg.selectAll('circle')
+				.transition()	//开启动画
+				.duration(500)	//设置动画持续时间500毫秒
+				.ease(Math.sqrt)	//用自定义的缓动函数为Math.sqrt
+				.attr('r', 100)
+			  .transition()
+				.duration(500)
+				.ease("poly",3)	//直接指定缓动函数为poly(3)
+				.attr('r', 50)
+			  .transition()
+				.duration(500)
+				.ease(d3.ease("bounce"))	//用d3.ease("bounce")返回缓动函数
+				.attr('r', 100)
+
+		</script>
+	</body>
+</html>
