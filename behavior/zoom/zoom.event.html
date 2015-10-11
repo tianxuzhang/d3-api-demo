@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="d3.v3.min.js"></script>
+<script>
+var width = 960,
+    height = 500;
+    
+var color = d3.scale.category10();
+
+var zoom = d3.behavior.zoom()
+    .on("zoomstart", zoomStarted)
+    .on("zoom", zoomed)
+    .on("zoomend", zoomEnded);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width )
+    .attr("height", height )
+  .append("g")
+    .call(zoom);
+    
+    
+var rect = svg.append("rect")
+    .attr("width", width/10)
+    .attr("height", height/10)
+    .style("fill", "green");
+function zoomed() {
+ 	rect.attr("width", d3.event.scale*width/10)
+    .attr("height", d3.event.scale*height/10)
+    .style("fill", function(){console.log(color(d3.event.scale));return color(d3.event.scale);});
+}
+function zoomStarted() {
+ 	console.log("started");
+ }
+function zoomEnded() {
+	console.log("ended");
+}
+
+</script>

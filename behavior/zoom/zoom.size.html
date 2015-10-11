@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="../../d3.js"></script>
+<script>
+var width = 960, height = 500;
+    
+var color = d3.scale.category10();
+
+var xScale = d3.scale.linear().domain([0,10]).range([0,100]);
+
+var zoom = d3.behavior.zoom().x(xScale)
+    .on("zoom", zoomed);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width )
+    .attr("height", height ).call(zoom);
+   
+var rect = svg.append("rect")
+    .attr("width", 50)
+    .attr("height", 50)
+    .style("fill", "tomato")
+    
+
+function zoomed() {
+ 	rect.attr("width", d3.event.scale*50)
+    	.attr("height", d3.event.scale*50)
+    	.style("fill", function(){
+			return color(d3.event.scale);
+		});
+}
+</script>
