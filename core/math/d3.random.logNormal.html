@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+text {
+	font-weight:bold;
+}
+.bar rect {
+  fill: #95859c;
+  shape-rendering: crispEdges;
+}
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+</style>
+<body>
+<script type="text/javascript" src="../../d3.js"></script>
+<script>
+var values = d3.range(1000).map(d3.random.logNormal(0,1));
+
+var width = 960,
+    height = 500,
+    padding=6;
+    
+var x = d3.scale.linear()
+    .domain([0, 1])
+    .range([0, 3*width/4]);
+
+var data = d3.layout.histogram()
+    .bins(x.ticks(20))
+    (values);
+    
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+    
+var y = d3.scale.linear()
+    .domain([0, d3.max(data, function(d) { return d.y; })])
+    .range([height, 0]) ;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width+30)
+    .attr("height", height+30)
+  .append("g")
+    .attr("transform", "translate(" + padding*2 + "," + padding + ")");
+    
+var bar = svg.selectAll(".bar")
+    .data(data)
+  .enter().append("g")
+    .attr("class", "bar")
+    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+bar.append("rect")
+ 	.attr("x",padding)
+    .attr("width", x(data[0].dx)-1)
+    .attr("height", function(d) { return height - y(d.y); });
+
+bar.append("text")
+    .attr("dy", ".35em")
+    .attr("y", 6)
+    .attr("x", padding)
+    .attr("text-anchor", "start")
+    .text(function(d) { return d.y; })
+    .attr("fill", "#fff");
+
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate("+padding+"," + height + ")")
+    .call(xAxis);
+</script>
