@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>geom.hull</title>
+<body>
+<script src="../../d3.js"></script>
+<script>
+
+var width = 960,
+    height = 500;
+
+var vertices = [ [ 100, 100 ], [ 140, 200 ], [ 140, 180 ], [ 130, 170 ],[ 230, 60 ],[ 90, 220 ], [ 200, 200 ]];
+var hull=d3.geom.hull(vertices);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("path")
+	.datum(hull)
+	.attr("d", function(d) {
+		return "M" + d.join("L") + "Z";
+	})
+	.attr("fill","green");
+	
+svg.selectAll("circle")
+    .data(vertices)
+    .enter()
+    .append("circle")
+    .attr("r", 3)
+    .attr("transform", function(d) { return "translate(" + d + ")"; })
+    .attr("fill","white")
+    .attr("stroke","black");
+</script>
