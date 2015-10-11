@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - selection.selectAll(selector)</title>
+		<style type="text/css">
+			table {
+				margin: 20px;
+				background-color: #eee;
+			}
+
+			td {
+				padding: 8px;
+			}
+			
+			td.selected {
+				background-color: #FF5C00;
+				color: white;
+			}
+		</style>
+	</head>
+	<script type="text/javascript" src="../../d3.js"></script>
+	<div style="width:300px;height:100px;">
+		<table>
+			<tr>
+				<td>苹果</td>	
+				<td>香蕉</td>
+				<td>西瓜</td>
+			</tr>
+			<tr>
+				<td>桃子</td>	
+				<td id="test">草莓</td>
+				<td>菠萝</td>
+			</tr>
+		</table>
+
+		<table>
+			<tr>
+				<td>可乐</td>
+				<td>牛奶</td>
+			</tr>
+			<tr>
+				<td>绿茶</td>
+				<td class="test">啤酒</td>
+			</tr>
+		</table>
+	</div>
+
+	<script>
+		d3.select("tr").selectAll("td").classed("selected",true);	//选择第一行的所有列，设置选中元素的背景色为橘黄色
+	</script>

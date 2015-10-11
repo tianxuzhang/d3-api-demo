@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - selection.data([values[, key]])</title>
+		<style type="text/css">
+	        td {
+				border-right: 1px solid steelblue;
+				border-bottom: 1px solid steelblue;
+				background: #fff;
+				font-size:11px;
+				color: black;
+			}
+		</style>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//定义一个二维数组
+			var matrix = [
+			  [11975,  5871, 8916, 2868],
+			  [ 1951, 10048, 2060, 6171],
+			  [ 8010, 16145, 8090, 8045],
+			  [ 1013,   990,  940, 6907]
+			];
+
+			var tr = d3.select("body").append("table").selectAll("tr")
+				.data(matrix)	//绑定二维数组，给表格的每行传递一个子数组
+			  .enter().append("tr");
+
+			var td = tr.selectAll("td")
+				.data(function(d) { return d; })	//绑定子数组，给每行的每列传递子数组中的数字
+			  .enter().append("td")
+				.text(function(d) { return d; });
+		</script>
+	</body>
+</html>

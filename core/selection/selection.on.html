@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - selection.on(type[, listener[, capture]])</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+		<style type="text/css">
+			svg text{
+				fill: tomato;
+			}
+		</style>
+	</head>
+	<body>
+	<button width=20 height=15>y=3*x</button><br>
+	<svg></svg>
+	
+		<script type="text/javascript">
+			//一维数组数据
+			var data = [1,2,3,4,5];
+
+			//新增元素
+			d3.select('svg').selectAll('text')
+				.data(data)	//绑定数据
+				.enter()		//返回新元素的占位符
+				.append('text')	//新增新元素
+				.attr({
+					y: function (d, i) {
+						return 20 + 20 * d;
+					}
+				}).text(function (d, i) { return "old："+d; });
+
+			//单击按钮更改文本内容
+			d3.select("button").on("click",function(){
+				d3.select('svg').selectAll('text')
+					.text(function (d, i) { return "new："+d*3; });
+			});
+		</script>
+	</body>
+</html>

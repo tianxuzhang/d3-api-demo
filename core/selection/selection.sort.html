@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>D3.core - d3.selections</title>
+		<style type="text/css">
+			svg text{
+				fill: tomato;
+			}
+			svg circle{
+				opacity: 0.8;
+			}
+		</style>
+		<!--import js file-->
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+	<button width=20 height=15>排序</button><br>
+	<svg></svg>
+	
+		<script type="text/javascript">
+			//一维数组数据
+			var data = [
+				{name: "A2", value: 2},
+				{name: "A1", value: 1},
+				{name: "A5", value: 5},
+				{name: "A4", value: 4},
+			];
+
+			//新增元素
+			d3.select('svg').selectAll('text')
+				.data(data)	//绑定数据
+				.enter()		//返回新元素的占位符
+				.append('text')	//新增新元素
+				.attr({
+					x: '13',
+					y: function (d, i) {
+						return 20 + 20 * i;
+					}
+				}).text(function (d, i) { return d.name; });
+			
+			//按照绑定数据的value属性进行排序
+			var sort=function(){
+				d3.select('svg').selectAll('text')
+				.sort(function (a, b) {
+					return a.value - b.value;
+				}).attr({
+					x: '13',
+					y: function (d, i) {
+						return 20 + 20 * i;
+					}
+				})
+				.text(function (d, i) { return d.name; });
+			};
+			//单击按钮进行排序
+			d3.select("button").on("click",sort)
+		</script>
+	</body>
+</html>

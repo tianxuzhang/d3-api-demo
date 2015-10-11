@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - selection.exit()</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<svg></svg>
+		<script type="text/javascript">
+			
+			//生成6个div标签，内容是1, 2, 3, 4, 5, 6
+			d3.select("body").selectAll("div")
+				.data([1, 2, 3, 4, 5, 6])
+				.enter()
+				.append("div")
+				.text(function(d) { return d; });
+			
+			//更新绑定的数组
+			divs=d3.select("body").selectAll("div")
+				.data([4, 5, 6, 7, 8, 9], function(d) { return d; })
+			
+			//用新数组生成div标签
+			divs.enter()
+				.append("div")
+				.text(function(d) { return d; });
+			
+			//将第一个数组中退出的数据对应的元素删除
+			divs.exit().remove()
+			
+			//增加索引属性
+			d3.selectAll("div").attr("index", function(d, i) { return i; });
+		</script>
+	</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - selection.attr(name[, value])</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<svg></svg>
+		<script type="text/javascript">
+			//绘制矩形的数据
+			var dataset = [ 5, 10, 15, 20, 25 ];  
+			
+			//创建矩形
+			rects=d3.select("svg").selectAll("rect")
+					.data(dataset)
+					.enter()
+					.append("rect")
+					.attr({
+						"x":function(d,i){ return 20+i*160/dataset.length;},
+						"y":20,
+						"width":20,
+						"height":100,
+						"fill":"white"
+					});
+			rects.style({
+				"stroke-width": 5,
+				"stroke": function(d,i){ return "rgb("+10*d+","+10*(25-d)+","+d+")"; }
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - selection.html([value])</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">		
+			d3.select('body').html("<h1>大家好，我是H1！</h1>");//设置innerHTML的内容		
+			d3.select('body')
+				.html(function (d, i) {//用函数设置innerHTML的内容
+					var old = d3.select(this).html();//获取innerHTML的内容
+					var newHtml = old + "<h2>大家好，我是H2！</h3>";
+					return newHtml;
+				});
+		</script>
+	</body>
+</html>

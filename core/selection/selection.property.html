@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - selection.property(name[, value])</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<input type="text" id="text-id" /><br>
+		<input type="checkbox" id="checkbox-id" />.property<br>
+		
+		<script type="text/javascript">
+			
+			d3.select('#text-id')
+				.property('value', function(){ 
+					return d3.select(this).property('id');	//获取id属性的值
+				});	//设置文本的value属性为此元素的ID值
+		
+			d3.select('#checkbox-id')
+				.property('checked', true);	//设置复选框的checked属性
+		</script>
+	</body>
+</html>

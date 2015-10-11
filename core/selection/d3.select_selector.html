@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>core - d3.select(selector)</title>
+		<style type="text/css">
+			table {
+				margin: 20px;
+				background-color: #eee;
+				font-weight:bold;
+			}
+
+			td {
+				padding: 8px;
+			}
+			
+			td.selected {
+				background-color: #FF5C00;
+				color: white;
+			}
+		</style>
+	</head>
+	<script type="text/javascript" src="../../d3.js"></script>
+	<div style="width:300px;height:100px;">
+		<table>
+			<tr>
+				<td>苹果</td>	
+				<td>香蕉</td>
+				<td>西瓜</td>
+			</tr>
+			<tr>
+				<td>桃子</td>	
+				<td id="test">草莓</td>
+				<td>菠萝</td>
+			</tr>
+		</table>
+
+		<table>
+			<tr>
+				<td>可乐</td>
+				<td>牛奶</td>
+			</tr>
+			<tr>
+				<td>绿茶</td>
+				<td class="test">啤酒</td>
+			</tr>
+		</table>
+	</div>
+
+	<script>
+		d3.select("td").classed("selected",true);	//设置第一个选中的<td>标签元素的背景色为橘黄色，字体颜色为白色
+		d3.select("#test").classed("selected",true);	//设置第一个ID为"#test"的元素的背景色为橘黄色，字体颜色为白色
+		d3.select(".test").classed("selected",true);	//设置第一个类名为".test"的标签元素的背景色为橘黄色，字体颜色为白色
+	</script>

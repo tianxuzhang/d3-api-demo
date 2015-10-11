@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - selection.enter()</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+	<svg></svg>
+		<script type="text/javascript">
+			//生成text元素的数据
+			var data = [ "text1","text2","text3","text4"];
+
+			//新增元素
+			d3.select("svg").selectAll('text')
+				.data(data)	//绑定数据
+				.enter()		//返回新元素的占位符
+				.append('text')	//新增新元素
+				.attr({
+					x: '20',
+					y: function (d, i) { return 20 + 20 * i; }
+				})
+				.text(function (d, i) { return d; });	
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - selection.text([value])</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			d3.select('body').text("selection.text([value])");	//设置元素的文本	
+			d3.select('body')
+				.text(function(){ 
+					return "new text: "+d3.select(this).text();
+				});	//设置元素的文本				
+		</script>
+	</body>
+</html>

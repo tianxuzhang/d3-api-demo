@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - selection.call(function[, arguments…])</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+	<svg></svg>
+		<script type="text/javascript">
+			var circle=d3.select('svg').append('circle')
+				.attr({
+					cx: 100,
+					cy: 100, 
+					r: 40
+				});
+			
+			var rect=d3.select('svg').append('svg:rect')
+				.attr({
+					x: 10,
+					y: 50,
+					width: 40,
+					height: 100
+				});
+			
+			//定义色彩填充方法
+			function fill(ele, fill) {
+				this.style("fill", fill);
+			}
+			
+			//使用call函数调用fill函数填充颜色
+			rect.call(fill, "orange");
+			circle.call(fill, "tomato");
+
+		</script>
+	</body>
+</html>

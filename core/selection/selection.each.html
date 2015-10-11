@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - selection.each(function)</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+	<svg></svg>
+		<script type="text/javascript">
+			//添加圆使用的数据集
+			var dataset=[1,2,3,4,5,6,7,8,9,10];
+			
+			//颜色比例尺
+			var color=d3.scale.category20();
+			
+			//使用数据集添加10个圆
+			d3.select('svg').selectAll("circle")
+				.data(dataset)
+				.enter()
+				.append('circle');
+			
+			//使用each函数为每个圆设置属性
+			d3.selectAll("circle")
+			.each(function(d){
+				d3.select(this).attr({
+					cx: function(d){ return 20*d;}, 
+					cy: 100, 
+					r: function(d){ return 3*d;},
+					fill:color(d)
+				});
+			});
+		</script>
+	</body>
+</html>

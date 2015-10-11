@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - selection.remove()</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//插入svg元素
+			var svg=d3.select("body").insert("svg");
+			//插入rect元素
+			svg.insert('svg:rect')
+				.attr({
+					x: 10,
+					y: 100,
+					width: 100,
+					height: 40,
+					fill: "forestgreen"
+				});
+			//在rect元素前插入circle元素
+			svg.insert('circle', 'rect')
+				.attr({
+					cx: 60,
+					cy: 75,
+					r: 25,
+					fill:"slateblue"
+				});
+			//移除插入的circle元素
+			var removed=d3.select("circle").remove();
+			console.log(removed);
+
+		</script>
+	</body>
+</html>

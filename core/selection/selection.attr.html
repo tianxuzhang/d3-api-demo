@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - selection.attr(name[, value])</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//绘制矩形的数据
+			var dataset = [ 5, 10, 15, 20, 25 ];  
+			
+			//创建SVG
+			var svg = d3.select("body")  
+					.append("svg")  
+					.attr("width", 960)	//一次设置一个属性值
+					.attr("height", 500);
+
+			//创建矩形
+			rects=svg.selectAll("rect")
+					.data(dataset)
+					.enter()
+					.append("rect")
+					.attr({	//一次设置多个属性值
+						"x":function(d,i){ return 20+i*160/dataset.length;},	//使用函数设置属性值
+						"y":function(d){ return 20;},
+						"width":20,
+						"height":100
+					})
+					.attr("fill","steelblue");
+		</script>
+	</body>
+</html>
+

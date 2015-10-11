@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - selection.interrupt()</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+	<svg></svg>	
+	<script type="text/javascript">
+
+			d3.select('svg').append('circle')
+				.attr({
+					cx: 100, cy: 100, r: 40,
+					fill: 'orange'
+				});
+			//开启动画，并设置动画结束时填充色为blue
+			d3.select('svg').select('circle').transition().duration(5000)
+				.attr("fill", "blue");
+			//设置定时器，2秒后启动
+			setTimeout(function () {
+				//2秒后立刻结束当前元素正在执行的动画
+				d3.select('svg').select('circle').interrupt();
+				//5秒后继续过渡为红色
+				d3.select('svg').select('circle').transition().delay(5000)
+				.attr("fill", "red");
+			}, 2000);
+		</script>
+	</body>
+</html>

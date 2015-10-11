@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - selection.append(name)</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//向body标签追加子元素svg
+			var svg = d3.select('body')
+				.append('svg');
+			//向svg元素追加有svg命名空间的rect子元素
+			svg.append('svg:rect')
+				.attr({
+					x: 10,
+					y: 10,
+					width: 100,
+					height: 40,
+					fill: "orange"
+				});
+		</script>
+	</body>
+</html>

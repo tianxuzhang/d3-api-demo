@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>core - selection.datum([value])</title>
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+	<div data-username="D3 user"></div>
+	<div data-username="D3 fans"></div>
+		<script type="text/javascript">
+
+		d3.selectAll("div")
+		.datum(function() { return this.dataset; })	//获取HTML5自定义数据属性
+		.text(function(d){ return d.username;});	//使用获取的数据设置文本的值
+		</script>
+	</body>
+</html>

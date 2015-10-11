@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" content="">
+		<title>D3.core - d3.selection</title>
+		<style type="text/css">
+			svg circle{
+				fill: orange;
+			}
+		</style>
+		<!--import js file-->
+		<script type="text/javascript" src="../../d3.js"></script>
+	</head>
+	<body>
+
+		<script type="text/javascript">
+			//以下代码的讲解，请参见d3.selections.html
+			var svg = d3.select('body')
+				.append('svg')	//向body标签增加svg子元素
+				.attr({
+					"width": 500,
+					"height": 500,
+				});
+			
+			svg.append('circle')
+				.attr({
+					cx: 100, cy: 100, r: 40
+				});
+
+			//开启动画，并设置动画结束时填充色为blue
+			svg.select('circle').call(start, 2000, "blue");
+			//设置定时器，1秒后启动
+			setTimeout(function () {
+				//立刻结束当前元素正在执行的动画，并开启新动画
+				svg.select('circle').call(start, 1000, "red");
+			}, 1000);
+
+			//定义动画逻辑方法
+			function start(ele, time, fill) {
+				this.transition().duration(time)
+					.style("fill", fill);
+			}
+		</script>
+	</body>
+</html>
