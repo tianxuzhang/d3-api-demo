@@ -1,33 +1,53 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8" content="">
-		<title>D3.core - d3.locale</title>
-		<style type="text/css">
-			svg text{
-				fill: orange;
-				font-size: 56px;
-			}
-		</style>
-		<!--import js file-->
-		<script type="text/javascript" src="../../d3.js"></script>
-		<script type="text/javascript" src="../d3.core.js"></script>
-	</head>
-	<body>
-
-		<script type="text/javascript">
-			//以下代码的讲解，请参见d3.selections.html
-			var svg = d3.select('body')
-				.append('svg')	//向body标签增加svg子元素
-				.attr({
-					"width": 700,
-					"height": 500,
-				});
-			
-			//下面是正文
-
-			//
-			var locale = d3.locale();
-		</script>
-	</body>
-</html>
+<meta charset="utf-8">
+<style>
+body{
+  font-weight:bold;
+}
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+</style>
+<body>
+<script src="../../d3.js"></script>
+<script>
+//简体中文本地化
+var zh = d3.locale({
+	decimal: ".",
+	thousands: ",",
+	grouping: [3],
+	currency: ["¥", ""],
+	dateTime: "%a %b %e %X %Y",
+	date: "%Y/%-m/%-d",
+	time: "%H:%M:%S",
+	periods: ["上午", "下午"],
+	days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+	shortDays: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+	months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+	shortMonths: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"]
+});
+//svg宽，高
+var width = 1000,height = 500;
+//时间比例尺
+var timeScale = d3.time.scale()
+    .domain([new Date(2015, 0, 1), new Date(2016, 1, 1)])
+    .range([0, width-40]); 
+	
+//时间轴
+var axis = d3.svg.axis()
+.scale(timeScale)
+.tickFormat(zh.timeFormat("%Y年%b"))
+.orient("bottom")	
+//添加时间轴    
+var svg = d3.select("body").append("svg")
+    .attr("width", width+200)
+    .attr("height", height)
+  .append("g")
+    .attr("class", "axis")
+    .attr("transform", "translate(" + 20 + "," + height/2 + ")")
+    .call(axis);
+//旋转文字
+d3.selectAll('g.tick text').attr('transform','translate(30,20)rotate(30)')
+</script>
