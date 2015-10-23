@@ -31,7 +31,7 @@ d3.json("world-50m.json", function(error, world) {
 		if (s != t) {
 			t = s;
 			var x = s%90;
-			projection.clipAngle([ 90 ]);
+			projection.clipAngle([ x ]);
 			div.html("剪裁角度：[" + x + "]");
 			feature.attr("d", path);
 		}
