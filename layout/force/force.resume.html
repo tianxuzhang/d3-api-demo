@@ -7,10 +7,10 @@
 var data={	//节点
   "nodes":[
     {"name":"A"},    {"name":"B"},    {"name":"C"},    {"name":"D"},
-	{"name":"E"},    {"name":"F"},    {"name":"G"},    {"name":"H"},
-	{"name":"I"},    {"name":"G"},    {"name":"K"},    {"name":"L"},
-	{"name":"M"},    {"name":"N"},    {"name":"O"},    {"name":"P"},
-	{"name":"Q"},    {"name":"R"},    {"name":"S"},    {"name":"T"},
+    {"name":"E"},    {"name":"F"},    {"name":"G"},    {"name":"H"},
+    {"name":"I"},    {"name":"G"},    {"name":"K"},    {"name":"L"},
+    {"name":"M"},    {"name":"N"},    {"name":"O"},    {"name":"P"},
+    {"name":"Q"},    {"name":"R"},    {"name":"S"},    {"name":"T"},
     {"name":"U"},    {"name":"V"},    {"name":"W"},    {"name":"X"},
     {"name":"Y"},    {"name":"Z"}
   ],
@@ -82,7 +82,6 @@ var node = svg.selectAll(".node")
 
 //按照力布局的节拍移动线和点的位置，直到收敛
 force.on("tick", function() {
-  force.resume();	//不停重启力布局
   link.attr("x1", function(d) { return d.source.x; })
       .attr("y1", function(d) { return d.source.y; })
       .attr("x2", function(d) { return d.target.x; })
@@ -91,5 +90,11 @@ force.on("tick", function() {
   node.attr("cx", function(d) { return d.x; })
       .attr("cy", function(d) { return d.y; });
 });
-
+//重启模拟按钮
+d3.select('body').insert('button','svg')
+	.text("重启力布局模拟")
+	.on('click',function(){
+		force.resume();  //重启模拟
+	})
+d3.select('body').insert('br','svg');
 </script>
