@@ -22,9 +22,12 @@
 
 			//追加测试元素
 			svg.append('g').attr('transform', 'translate(0, 0)')
+				.selectAll('rect')
+				.data([50,250])
+				.enter()
 				.append('rect')
 				.attr({
-					x: 50, y: 50, width: 50, height: 50
+					x: function(d){ return d;}, y: 50, width: 50, height: 50
 				});
 			
 			//
@@ -33,7 +36,7 @@
 				.duration(500)	//设置动画持续时间500毫秒
 				.attr('transform', "translate(0, 50)")	//设置过渡结束时矩形向下平移50个像素
 				.select('rect')
-					.attr('width', 100);//设置矩形过渡结束后的宽为100
+				.attr('width', 100);//设置矩形过渡结束后的宽为100
 		</script>
 	</body>
 </html>
