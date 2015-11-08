@@ -4,52 +4,53 @@
 <script src="../../d3.js" charset="utf-8" ></script>
 <script>
 var data={
- "name": "AAA",
- "children": 
- [
-  	  { "name": "BBB", 
-  	  	"children": 
-  	    [
-  	      	{"name": "CCC", 
-  	      	"children": 
-  	      	[
-  	          		{"name": "DDD", 
-  	          		 "children":
-					 [
-							{"name": "EEE"}, 	{"name": "EEE"},
-					      	{"name": "EEE"}, 	{"name": "EEE"},
-					      	{"name": "EEE"}, 	{"name": "EEE"},
-					      	{"name": "EEE"}, 	{"name": "EEE"},
-					      	{"name": "EEE"}, 	{"name": "EEE"},
-					      	{"name": "EEE"}, 	{"name": "EEE"},
-					      	{"name": "EEE"}, 	{"name": "EEE"},
-					      	{"name": "EEE"}, 	{"name": "EEE"}
-					 ]},
-			      	{"name": "DDD"}, 	{"name": "DDD"},
-			      	{"name": "DDD"}, 	{"name": "DDD"},
-			      	{"name": "DDD"}, 	{"name": "DDD"},
-			      	{"name": "DDD"}, 	{"name": "DDD"},
-			      	{"name": "DDD"}, 	{"name": "DDD"},
-			      	{"name": "DDD"}, 	{"name": "DDD"},
-			      	{"name": "DDD"}, 	{"name": "DDD"},
-			      	{"name": "DDD"}, 	{"name": "DDD"}
-  	      	]},
-	      	{"name": "CCC"}, 	{"name": "CCC"},
-	      	{"name": "CCC"}, 	{"name": "CCC"},
-	      	{"name": "CCC"}, 	{"name": "CCC"},
-	      	{"name": "CCC"}, 	{"name": "CCC"},
-	      	{"name": "CCC"}, 	{"name": "CCC"},
-	      	{"name": "CCC"}, 	{"name": "CCC"},
-	      	{"name": "CCC"}, 	{"name": "CCC"},
-	      	{"name": "CCC"}, 	{"name": "CCC"},
-	      	{"name": "CCC"}
-  	  ]
-	  },
-      {"name": "BBB"},
-      {"name": "BBB"},
-      {"name": "BBB"}
- ]
+	 value:1,
+	 children: 
+	 [
+		  { value:1, 
+			children: 
+		    [
+			{value:1, 
+			children: 
+			[
+				{value:1, 
+				 children:
+						 [
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1}
+						 ]},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1}
+			]},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}
+		  ]
+		  },
+	      {value:1},
+	      {value:1},
+	      {value:1}
+	 ]
 };
+
 var width = 960,
     height = 500,
     radius = Math.min(width, height) / 2,
@@ -65,8 +66,7 @@ var partition = d3.layout.partition()
     .sort(function comparator(a, b) {
 		return a.value - b.value;
 	})
-    .size([2 * Math.PI, radius * radius])
-    .value(function(d) { return 1; });
+    .size([2 * Math.PI, radius * radius]);
 
 var arc = d3.svg.arc()
     .startAngle(function(d) { return d.x; })
@@ -79,6 +79,6 @@ svg.selectAll("path")
   .enter().append("path")
     .attr("d", arc)
     .style("stroke", "#fff")      
-	.style("fill", function(d) { return color((d.children ? d : d.parent).name); });
+	.style("fill", function(d) { return color((d.children ? d : d.parent).value); });
 
 </script>
