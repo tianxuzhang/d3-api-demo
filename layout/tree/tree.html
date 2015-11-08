@@ -19,52 +19,53 @@
 <script src="../../d3.js"></script>
 <script>
 var data={
- "name": "AAA",
- "children": 
- [
-  	  { "name": "BBB", 
-  	  	"children": 
-  	    [
-  	      	{"name": "CCC", 
-  	      	"children": 
-  	      	[
-  	          		{"name": "DDD", 
-  	          		 "children":
-					 [
-							{"name": "EEE"}, 	{"name": "EEE"},
-					      	{"name": "EEE"}, 	{"name": "EEE"},
-					      	{"name": "EEE"}, 	{"name": "EEE"},
-					      	{"name": "EEE"}, 	{"name": "EEE"},
-					      	{"name": "EEE"}, 	{"name": "EEE"},
-					      	{"name": "EEE"}, 	{"name": "EEE"},
-					      	{"name": "EEE"}, 	{"name": "EEE"},
-					      	{"name": "EEE"}, 	{"name": "EEE"}
-					 ]},
-			      	{"name": "DDD"}, 	{"name": "DDD"},
-			      	{"name": "DDD"}, 	{"name": "DDD"},
-			      	{"name": "DDD"}, 	{"name": "DDD"},
-			      	{"name": "DDD"}, 	{"name": "DDD"},
-			      	{"name": "DDD"}, 	{"name": "DDD"},
-			      	{"name": "DDD"}, 	{"name": "DDD"},
-			      	{"name": "DDD"}, 	{"name": "DDD"},
-			      	{"name": "DDD"}, 	{"name": "DDD"}
-  	      	]},
-	      	{"name": "CCC"}, 	{"name": "CCC"},
-	      	{"name": "CCC"}, 	{"name": "CCC"},
-	      	{"name": "CCC"}, 	{"name": "CCC"},
-	      	{"name": "CCC"}, 	{"name": "CCC"},
-	      	{"name": "CCC"}, 	{"name": "CCC"},
-	      	{"name": "CCC"}, 	{"name": "CCC"},
-	      	{"name": "CCC"}, 	{"name": "CCC"},
-	      	{"name": "CCC"}, 	{"name": "CCC"},
-	      	{"name": "CCC"}
-  	  ]
-	  },
-      {"name": "BBB"},
-      {"name": "BBB"},
-      {"name": "BBB"}
- ]
+	 value:1,
+	 children: 
+	 [
+		  { value:1, 
+			children: 
+		    [
+			{value:1, 
+			children: 
+			[
+				{value:1, 
+				 children:
+						 [
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1}
+						 ]},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1}
+			]},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}
+		  ]
+		  },
+	      {value:1},
+	      {value:1},
+	      {value:1}
+	 ]
 };
+
 
 var diameter = 960; 
 var tree = d3.layout.tree()
