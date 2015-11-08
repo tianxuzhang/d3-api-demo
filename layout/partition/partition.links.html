@@ -23,52 +23,52 @@ svg text{
 <script src="../../d3.js" charset="utf-8" ></script>
 <script>
 var data={
-		 "name": "AAA",
-		 "children": 
-		 [
-			  { "name": "BBB", 
-				"children": 
-			    [
-				{"name": "CCC", 
-				"children": 
-				[
-					{"name": "DDD", 
-					 "children":
-							 [
-								{"name": "EEE"}, 	{"name": "EEE"},
-								{"name": "EEE"}, 	{"name": "EEE"},
-								{"name": "EEE"}, 	{"name": "EEE"},
-								{"name": "EEE"}, 	{"name": "EEE"},
-								{"name": "EEE"}, 	{"name": "EEE"},
-								{"name": "EEE"}, 	{"name": "EEE"},
-								{"name": "EEE"}, 	{"name": "EEE"},
-								{"name": "EEE"}, 	{"name": "EEE"}
-							 ]},
-						{"name": "DDD"}, 	{"name": "DDD"},
-						{"name": "DDD"}, 	{"name": "DDD"},
-						{"name": "DDD"}, 	{"name": "DDD"},
-						{"name": "DDD"}, 	{"name": "DDD"},
-						{"name": "DDD"}, 	{"name": "DDD"},
-						{"name": "DDD"}, 	{"name": "DDD"},
-						{"name": "DDD"}, 	{"name": "DDD"},
-						{"name": "DDD"}, 	{"name": "DDD"}
-				]},
-				{"name": "CCC"}, 	{"name": "CCC"},
-				{"name": "CCC"}, 	{"name": "CCC"},
-				{"name": "CCC"}, 	{"name": "CCC"},
-				{"name": "CCC"}, 	{"name": "CCC"},
-				{"name": "CCC"}, 	{"name": "CCC"},
-				{"name": "CCC"}, 	{"name": "CCC"},
-				{"name": "CCC"}, 	{"name": "CCC"},
-				{"name": "CCC"}, 	{"name": "CCC"},
-				{"name": "CCC"}
-			  ]
-			  },
-		      {"name": "BBB"},
-		      {"name": "BBB"},
-		      {"name": "BBB"}
-		 ]
-		};
+	 value:1,
+	 children: 
+	 [
+		  { value:1, 
+			children: 
+		    [
+			{value:1, 
+			children: 
+			[
+				{value:1, 
+				 children:
+						 [
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1},
+							{value:1}, 	{value:1}
+						 ]},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1},
+					{value:1}, 	{value:1}
+			]},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}, 	{value:1},
+			{value:1}
+		  ]
+		  },
+	      {value:1},
+	      {value:1},
+	      {value:1}
+	 ]
+};
 
 var width = 960,
     height = 960/2,
@@ -103,6 +103,5 @@ var partition = d3.layout.partition()
   node.append("text")
       .attr("dx", function(d) { return d.children ? -8 : 8; })
       .attr("dy", 3)
-      .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
-      .text(function(d) { return d.name; });
+      .style("text-anchor", function(d) { return d.children ? "end" : "start"; });
  </script>
