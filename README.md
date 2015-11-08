@@ -24,7 +24,8 @@
 * 第八章 行为
 
 # License
-*[ Apache License Version 2.0](https://github.com/tianxuzhang/d3-api-demo/blob/master/LICENSE)
+
+* [ Apache License Version 2.0](https://github.com/tianxuzhang/d3-api-demo/blob/master/LICENSE)
 
 # References 
 
