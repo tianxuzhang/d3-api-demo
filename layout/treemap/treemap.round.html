@@ -12,76 +12,41 @@ rect {
 <script src="../../d3.js"></script>
 <script>
 var data={
- "name": "AAA",
- "children": 
- [
-  	  { "name": "BBB", 
-  	  	"children": 
-  	    [
-  	      	{"name": "CCC", 
-  	      	"children": 
-  	      	[
-  	          		{"name": "DDD", 
-  	          		 "children":
-					 [
-							{"name": "EEE", "size": 73},
-					      	{"name": "EEE", "size": 39},
-					      	{"name": "EEE", "size": 67},
-					      	{"name": "EEE", "size": 73},
-					      	{"name": "EEE", "size": 39},
-					      	{"name": "EEE", "size": 67},
-					      	{"name": "EEE", "size": 73},
-					      	{"name": "EEE", "size": 39},
-					      	{"name": "EEE", "size": 67},
-					      	{"name": "EEE", "size": 73},
-					      	{"name": "EEE", "size": 39},
-					      	{"name": "EEE", "size": 67},
-					      	{"name": "EEE", "size": 73},
-					      	{"name": "EEE", "size": 39},
-					      	{"name": "EEE", "size": 67},
-					      	{"name": "EEE", "size": 73}
-					 ]},
-			      	{"name": "DDD", "size": 73},
-			      	{"name": "DDD", "size": 39},
-			      	{"name": "DDD", "size": 67},
-			      	{"name": "DDD", "size": 73},
-			      	{"name": "DDD", "size": 39},
-			      	{"name": "DDD", "size": 67},
-			      	{"name": "DDD", "size": 73},
-			      	{"name": "DDD", "size": 39},
-			      	{"name": "DDD", "size": 67},
-			      	{"name": "DDD", "size": 73},
-			      	{"name": "DDD", "size": 39},
-			      	{"name": "DDD", "size": 67},
-			      	{"name": "DDD", "size": 73},
-			      	{"name": "DDD", "size": 39},
-			      	{"name": "DDD", "size": 67},
-			      	{"name": "DDD", "size": 73}
-  	      	]},
-	      	{"name": "CCC", "size": 67},
-	      	{"name": "CCC", "size": 73},
-	      	{"name": "CCC", "size": 39},
-	      	{"name": "CCC", "size": 67},
-	      	{"name": "CCC", "size": 73},
-	      	{"name": "CCC", "size": 39},
-	      	{"name": "CCC", "size": 67},
-	      	{"name": "CCC", "size": 73},
-	      	{"name": "CCC", "size": 39},
-	      	{"name": "CCC", "size": 67},
-	      	{"name": "CCC", "size": 73},
-	      	{"name": "CCC", "size": 39},
-	      	{"name": "CCC", "size": 67},
-	      	{"name": "CCC", "size": 73},
-	      	{"name": "CCC", "size": 39},
-	      	{"name": "CCC", "size": 67},
-	      	{"name": "CCC", "size": 73}
-  	  ]
-	  },
-      {"name": "BBB", "size": 39},
-      {"name": "BBB", "size": 67},
-      {"name": "BBB", "size": 73}
- ]
+	"name": "AAA",
+	"children": 
+	[
+	 	  { "name": "BBB", 
+	 	  	"children": 
+	 	    [
+	 	      	{"name": "CCC", 
+	 	      	"children": 
+	 	      	[
+	 	          		{"name": "DDD", 
+	 	          		 "children":
+						 [
+								{"name": "EEE", "size": 2},
+						      	{"name": "EEE", "size": 2},
+						      	{"name": "EEE", "size": 2},
+						      	{"name": "EEE", "size": 2}
+						 ]},
+				      	{"name": "DDD", "size": 4},
+				      	{"name": "DDD", "size": 2},
+				      	{"name": "DDD", "size": 4},
+				      	{"name": "DDD", "size": 2}
+	 	      	]},
+		      	{"name": "CCC", "size": 4},
+		      	{"name": "CCC", "size": 2},
+		      	{"name": "CCC", "size": 4},
+		      	{"name": "CCC", "size": 2}
+	 	  ]
+		  },
+	     {"name": "BBB", "size": 4},
+	     {"name": "BBB", "size": 2},
+	     {"name": "BBB", "size": 4}
+	]
 };
+
+
 var width = 960,
     height = 500,
     color = d3.scale.category20();
