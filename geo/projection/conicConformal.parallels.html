@@ -11,19 +11,33 @@ var svg = d3.select("body").append("svg")
     .attr("height", height);
     
 var projection = d3.geo.conicConformal()
-    .parallels([0, 0])
+    .parallels([0, 90])
     .scale(80)
     .translate([width / 2, height / 2]);
 
 var path = d3.geo.path()
     .projection(projection);
+    
+var graticule = d3.geo.graticule();
 
-d3.json("world-50m.json", function(error, us) {
-  svg.insert("path", ".graticule")
-      .datum(topojson.feature(us, us.objects.land))
-      .attr("class", "land")
-      .attr("d", path)
-      .attr("fill","steelblue");
+d3.json("world-50m.json", function(error, world) {
+  svg.selectAll('path')
+  	.data(graticule.lines())
+	.enter()
+	.append('path')
+	.attr("stroke","steelblue")
+	.attr("fill","none")
+	.attr("stroke-width","2")
+	.attr("d", path);
+  
+  svg.insert("path", "path")
+    .datum(topojson.feature(world, world.objects.land))
+    .attr("class", "land")
+    .attr("d", path)
+    .attr("fill","#ed6d3d")
+    .attr("stroke","black")
+	.attr("stroke-width","1")
+	
 });
 </script>
 
