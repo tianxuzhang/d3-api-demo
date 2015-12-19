@@ -58,7 +58,7 @@ var cluster=d3.layout.cluster();
 var nodes=pack.nodes(root);
 var links=cluster.links(nodes);
 var diagonal = d3.svg.diagonal()
-    .projection(function(d) { return [d.y, d.x]; });
+    .projection(function(d) { return [d.y, d.x]; });  //这里为了便于展示文字，将坐标用投影函数倒置
 svg.selectAll("path")
     .data(links)
   .enter().append("path")
@@ -69,7 +69,7 @@ svg.selectAll("path")
       .data(nodes)
     .enter().append("g")
       .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });  //这里为了便于展示文字，将坐标用投影函数倒置
 
   node.append("circle")
       .attr("r", 4.5);
