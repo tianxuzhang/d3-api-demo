@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <body>
-<script src="d3.v3.min.js"></script>
+<script src="../../d3.js"></script>
 <script>
 
 var matrix = [
@@ -13,7 +13,7 @@ var matrix = [
 
 var chord = d3.layout.chord()
 	//.sortChords(d3.ascending)
-	.sortChords(d3.descending)	//弦图弦排序
+	.sortChords(d3.descending)	//弦图弦降序排序
     .matrix(matrix);
     
 var fill = d3.scale.category20();
