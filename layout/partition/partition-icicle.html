@@ -73,5 +73,5 @@ svg.selectAll(".node")
     .attr("y", function(d) { return d.y; })
     .attr("width", function(d) { return d.dx; })
     .attr("height", function(d) { return d.dy; })
-    .style("fill", function(d) { return color((d.children ? d : d.parent).name);});
+    .style("fill", function(d) { return color((d.children ? d : d.parent).value);});
 </script>
