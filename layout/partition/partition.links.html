@@ -71,31 +71,30 @@ var data={
 };
 
 var width = 960,
-    height = 960/2,
+    height = 500,
     color = d3.scale.category10();
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height*3)  
     .append("g")
-    .attr("transform", "translate(40,40)");
+    .attr("transform", "translate(10,40)");
  
 var partition = d3.layout.partition() 
-    .size([600, height]) 
-    .value(function(d) { return 1; });
+    .size([width, height]);
 
   var nodes = partition.nodes(data); 
   svg.selectAll(".path")
     .data(partition.links(nodes))
   .enter().append("path")
   	.attr("class","link")
-    .attr("d", d3.svg.diagonal().projection(function(d) { return [d.y, d.x]; }));
+    .attr("d", d3.svg.diagonal());
 
  var node = svg.selectAll(".node")
       .data(nodes)
     .enter().append("g")
       .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
   node.append("circle")
       .attr("r", 4.5);
