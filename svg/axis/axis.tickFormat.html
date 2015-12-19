@@ -31,9 +31,9 @@
 				});
 			
 			//构造比例尺
-			var timeScale = d3.time.scale().domain([new Date(2016, 1, 1), new Date(2016, 5, 1)]).range([0, width/2]);
-			var logScale = d3.scale.log().domain([1, 100]).range([0, width/2]);
-			var linearScale = d3.scale.linear().domain([0, 1]).range([0, width/2]);
+			var timeScale = d3.time.scale().domain([new Date(2016, 1, 1), new Date(2016, 5, 1)]).range([0, width-100]);
+			var logScale = d3.scale.log().domain([1, 100]).range([0, width-100]);
+			var linearScale = d3.scale.linear().domain([0, 1]).range([0, width-100]);
 			
 			//轴
 			var timeAxis=d3.svg.axis().scale(timeScale).orient("bottom");
