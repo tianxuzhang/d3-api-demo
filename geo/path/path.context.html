@@ -28,4 +28,11 @@ d3.json("china.json", function(error, china) {
 	context.fill();
 });
 
+//添加南海诸岛示意图
+//此图截自Echarts：http://echarts.baidu.com/doc/example/map9.html
+var img = new Image();  
+	img.src = "southchinasea.png";  
+	img.onload = function() {  
+		context.drawImage(img, 550, 350, 50, 70);  
+	} 
 </script>
