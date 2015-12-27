@@ -39,4 +39,14 @@ d3.json("china.json", function(error, china) {
 	  });
 });
 
+//添加南海诸岛示意图
+//此图截自Echarts：http://echarts.baidu.com/doc/example/map9.html
+svg.append("svg:image")
+	.attr("xlink:href","southchinasea.png")
+	.attr({
+		x:550,
+		y:350,
+		"width":50,
+		"height":70
+	});
 </script>
