@@ -1,5 +1,6 @@
 # d3-api-demo
->《D3 API 详解》随书源码。
+《D3 API 详解》随书源码。
+>
 * 源码对[D3.js官方API文档](https://github.com/mbostock/d3/wiki/API-Reference)中的函数进行介绍，限于彩版篇幅限制部分内容有删减。
 * 如果发现错误或有疑问欢迎通过邮件zhang_tianxu@sina.com交流！
 * 欢迎提交Pull Request提供更好的方案！
