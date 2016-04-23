@@ -32,11 +32,12 @@
 * 第八章 行为
 
 # Corrigenda
-	[勘误表](https://github.com/tianxuzhang/d3-api-demo/issues/1)
+	
+* [勘误表](https://github.com/tianxuzhang/d3-api-demo/issues/1)
 
 # License
 
-* [ Apache License Version 2.0](https://github.com/tianxuzhang/d3-api-demo/blob/master/LICENSE)
+* [Apache License Version 2.0](https://github.com/tianxuzhang/d3-api-demo/blob/master/LICENSE)
 
 # References 
 
