@@ -1,5 +1,8 @@
 # d3-api-demo
 《D3 API 详解》随书源码。
+
+<a href="https://d3js.org"><img src="http://img.blog.csdn.net/20160522224118586?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"></a>
+
 >
 * 源码对[D3.js官方API文档](https://github.com/mbostock/d3/wiki/API-Reference)中的函数进行介绍，限于彩版篇幅限制部分内容有删减。
 * 如果发现错误或有疑问欢迎通过邮件zhang_tianxu@sina.com交流！
@@ -15,21 +18,7 @@
 
 # Contents
 
-* 第一章 核心函数
-
-* 第二章 比例尺
-
-* 第三章 可缩放矢量图形
-
-* 第四章 时间
-
-* 第五章 布局
-
-* 第六章 地理
-
-* 第七章 几何
-
-* 第八章 行为
+![Contents](http://img.blog.csdn.net/20160522224034406?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
 
 # Corrigenda
 	
