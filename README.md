@@ -79,9 +79,12 @@ http://selection.datavisualization.ch/
 
 **其他**
 >https://github.com/mbostock/d3/wiki/Core.
-  http://www.w3.org/TR/css3-selectors/.
-  http://sizzlejs.com/.
-  http://www.w3.org/TR/DOM-Level-3-Core/core.html#Node3-textContent.
+
+http://www.w3.org/TR/css3-selectors/.
+
+http://sizzlejs.com/.
+
+http://www.w3.org/TR/DOM-Level-3-Core/core.html#Node3-textContent.
   http://www.w3.org/TR/html5/apis-in-html-documents.html#innerhtml.
   https://developer.mozilla.org/en-US/docs/XMLSerializer.
   http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-registration.
