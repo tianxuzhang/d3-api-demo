@@ -17,15 +17,17 @@ var path = d3.geo.path()
 				.projection(projection)
 				.context(context);
 
+var color = d3.scale.category20();
+
 d3.json("china.json", function(error, china) {
-	canvas.selectAll("path")
-		.data( china.features )
-		.enter()
-		.append("path")
-		.attr("d",path);
-	context.stroke();
-	context.fillStyle='steelblue';
-	context.fill();
+	for (var i = china.features.length - 1; i >= 0; i--) {
+		context.beginPath();
+		path(china.features[i]);
+		context.fillStyle = color(i);
+		context.fill();
+		context.closePath();
+	};
+	
 });
 
 //添加南海诸岛示意图
