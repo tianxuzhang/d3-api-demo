@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="../../d3.js"></script>
+<script>
+//节点和连接数据
+var data={	//节点
+  "nodes":[
+    {"name":"A"},    {"name":"B"},    {"name":"C"},    {"name":"D"},
+	{"name":"E"},    {"name":"F"},    {"name":"G"},    {"name":"H"}
+  ],
+  "links":[	//连接
+    {"source":1,"target":0,"num":1},    {"source":1,"target":0,"num":2},
+	{"source":2,"target":0,"num":1},    {"source":2,"target":0,"num":2},
+    {"source":3,"target":0,"num":1},    {"source":3,"target":0,"num":2},    {"source":3,"target":0,"num":3},    {"source":3,"target":0,"num":4},    
+	{"source":3,"target":2,"num":1},    {"source":3,"target":2,"num":2},    {"source":3,"target":2,"num":3}
+  ]
+};
+
+var width = 960,
+    height = 500;
+
+var L = 10;
+var force = d3.layout.force()
+	.linkDistance(200)
+    .size([width, height]);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var color=d3.scale.category10();
+
+force
+	.nodes(data.nodes)
+	.links(data.links)
+	.start();
+
+var link = svg.selectAll(".link")
+	.data(data.links)
+	.enter().append("path")
+	.attr("fill", 'none')
+	.attr("stroke", function(d,i){ return color(d.num);})
+
+//绘制节点
+var node = svg.selectAll(".node")
+	.data(data.nodes)
+	.enter()
+	.append("circle")
+	.attr("fill", function(d,i){ return color(i);})
+	.attr("r", 5)
+	.attr("stroke","black")
+	.attr("stroke-width",1).call(force.drag().on("dragend",function(d){
+		d.fixed=true;		//拖动结束后节点固定
+	}));
+
+force.on("tick", function() {
+	link.attr("d", function(d) { 
+		// 计算线的中点
+		// 计算垂直平分线
+		// 计算出delta(X,Y)和目标坐标
+		// 用贝塞尔曲线绘制
+		var center = {
+			x: (d.source.x + d.target.x) / 2,
+			y: (d.source.y + d.target.y) / 2
+		};
+		var dx = d.target.x - d.source.x,
+			dy = d.target.y - d.source.y,
+			a = - dx / dy,
+			ndx = d.num * L * Math.cos(Math.atan(a)),
+			ndy = d.num * L * Math.sin(Math.atan(a)),
+			cx = center.x + ndx,
+			cy = center.y + ndy
+		
+		return "M"+d.source.x+','+d.source.y+"Q"+cx+','+cy+' '+d.target.x+','+d.target.y; 
+	
+	
+	});
+
+	node.attr("cx", function(d) { return d.x; })
+	  .attr("cy", function(d) { return d.y; });
+});
+
+</script>
