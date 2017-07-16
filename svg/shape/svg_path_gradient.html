@@ -1,0 +1,18 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>svg - svg:path stroke gradient</title>
+</head>
+<body>
+<svg width="960" height="500">
+    <defs>
+        <linearGradient id="gradient">
+            <stop offset="0%" stop-color="red"/>
+            <stop offset="50%" stop-color="green" stop-opacity=".5" />
+            <stop offset="100%" stop-color="blue" stop-opacity="1" />
+        </linearGradient>
+    </defs>
+    <path d="M 100 350 q 150 -300 300 0" stroke="url(#gradient)" stroke-width="10" fill="none"/>
+</svg>
+</body>
